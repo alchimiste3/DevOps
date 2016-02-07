@@ -62,6 +62,7 @@ Pour finir l’itération, le fichier temporaire pom_tmp.xml est supprimé.
 
 ###**d) Récupération et affichage des résultats**
 Lorsque la boucle a généré et testé les mutants, on récupère les informations des .xml en sortie de maven et on analyse les résultats grâce à une parser JAVA lancer par le script bash; on les affiches ensuite de plusieurs manières via des graphiques dans un fichier .html : pour un test en particulier, regarder par exemple le nombre de mutant qui ont échoué.
+Pour cette étape nous utiliserons JavaFX.
 
 #**II ) Mutations choisies (Quelles mutations, où les appliquer, comment les appliquer ?)**
 
