@@ -65,6 +65,7 @@ Lorsque la boucle a généré et testé les mutants, on récupère les informati
 Pour cette étape nous utiliserons JavaFX.
 
 #**II ) Mutations choisies (Quelles mutations, où les appliquer, comment les appliquer ?)**
+Pour l'instant on ne fait qu'une seule modification dans le code a chaque mutation. Par exemple si on modifie int en float, on prend un seul int dans le code et on le modifie. Nous amplifierons le nombre de modifications après avoir une meilleure prise en main de l'outil (et après nous être assurés qu'il n'y a pas de risque d'obtenir un code non compilable)
 
 ###**1 ) float -> int ou int -> float**
 
