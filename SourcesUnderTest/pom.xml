@@ -10,6 +10,8 @@
 
 <build>
     <plugins>
+        <!--validate -->
+        <!--initialize -->
         <!--plugin spoon : generate-sources -->
         <plugin>
             <groupId>fr.inria.gforge.spoon</groupId>
@@ -37,6 +39,16 @@
                 </dependency>
             </dependencies>
         </plugin>
+
+        <!-- process-sources -->
+        <!--generate-resources -->
+        <!-- process-resources -->
+        <!--compile-->
+        <!--generate-test-sources-->
+        <!--process-test-sources-->
+        <!--generate-test-resources-->
+        <!--process-test-resources-->
+        <!--test-compile-->
     </plugins>
 </build>
 
