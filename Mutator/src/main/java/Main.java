@@ -6,13 +6,16 @@ import processor.BinaryOperatorMutator;
  */
 public class Main {
     public static void main(String[] args) {
-        if (args.length < 1) {
+        String src = "/home/user/Documents/DevOps/DevOps/Mutator/src/main/java/MaPremiereClasse.java";
+      //  if (args.length < 1) {
             System.out.println("Aucune source passée en paramètre");
-        }
-        else {
-            System.out.println("Application de la mutation sur le fichier" + args[0]);
+      //  }
+      //  else {
+            System.out.println("Application de la mutation sur le fichier" + src);
             BinaryOperatorMutator mutationOperator = new BinaryOperatorMutator();
-        }
+            MutationTester mutationTester = new MutationTester(src, mutationOperator);
+            mutationTester.generateMutants();
+      //  }
         
     }
 }
