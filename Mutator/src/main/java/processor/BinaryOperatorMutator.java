@@ -11,7 +11,7 @@ public class BinaryOperatorMutator extends AbstractProcessor<CtElement> {
 		return candidate instanceof CtBinaryOperator;
 	}
 
-	@Override
+	
 	public void process(CtElement candidate) {
 		if (!(candidate instanceof CtBinaryOperator)) {
 			return;

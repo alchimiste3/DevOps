@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import spoon.Launcher;
@@ -9,6 +10,7 @@ import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.filter.TypeFilter;
 
@@ -18,9 +20,7 @@ import spoon.reflect.visitor.filter.TypeFilter;
  */
 public class MutationTester {
 
-	/** the content of the Java source code file to be mutated */
 	private String sourceCodeToBeMutated;
-	/** mutation operator */
 	private Processor mutator;
 	
 	/** the produced mutants */
@@ -32,20 +32,24 @@ public class MutationTester {
 	}
 
 	/** returns a list of mutant classes */
-	public void generateMutants() {
+	public void generateMutants(String src) {
 		Launcher l = new Launcher();
 		l.addInputResource(sourceCodeToBeMutated);
 		l.buildModel();
-                l.setSourceOutputDirectory("/home/user/Documents/DevOps/DevOps/Mutator/src/main/java/mute");
+        l.setSourceOutputDirectory(src+"/mute");
 
-		CtClass origClass = (CtClass) l.getFactory().Package().getRootPackage()
-				.getElements(new TypeFilter(CtClass.class)).get(0);
+		CtClass origClass = (CtClass) l.getFactory().Package().getRootPackage().getElements(new TypeFilter(CtClass.class)).get(0);
 
+        Iterator<CtPackage> it = l.getFactory().Package().getAll().iterator();
+//        it.next();
+//	    CtClass origClass = (CtClass) it.next().getElements(new TypeFilter(CtClass.class)).get(0);
+        
+        System.out.println(l.getFactory().Package().getRootPackage().getPackages().iterator().next().getPackages().iterator().next());
+        
 		// now we apply a transformation
 		// we replace "+" and "*" by "-"
 		List<CtElement> elementsToBeMutated = origClass.getElements(new Filter<CtElement>() {
 
-			@Override
 			public boolean matches(CtElement arg0) {
 				return mutator.isToBeProcessed(arg0);
 			}
