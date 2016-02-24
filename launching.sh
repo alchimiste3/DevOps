@@ -1,8 +1,11 @@
-#creating .jar
+#creating dependency
+cd ./Mutator
+mvn clean install
 
-#adding as dependency of sourcesundertest
+#launching test
+cd ../SourcesUnderTest
+mvn clean test
 
-#launching test (which will use the dependency)
-mvn test
+#launching junit ananlyser
 
-#launching display program
+#cleaning?
