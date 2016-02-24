@@ -47,7 +47,7 @@
                 <version>2.2</version>
                 <executions>
                     <execution>
-                        <phase>generate-sourcess</phase>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
@@ -56,11 +56,8 @@
                 <configuration>
 
                     <processors>
-			<processor>
-                            processor.BinaryOperatorMutator
-			</processor>
                         <processor>
-			    processor.MulOperatorMutator
+                            processor.BinaryOperatorMutator
                         </processor>
                     </processors>
                 </configuration>
