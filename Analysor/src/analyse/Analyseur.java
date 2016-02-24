@@ -1,30 +1,50 @@
 package analyse;
 
 import java.io.*;
-import org.jdom2.*;
-import org.jdom2.input.SAXBuilder;
-
-import javax.xml.bind.Element;
-
 import java.util.ArrayList;
-import java.util.Iterator;
+
+import lecture_ecriture.LireXML;
 
 
 public class Analyseur {
     
-    private String furefirePath = "surefire-reports/";
+    private String furefirePath;
+    
+    private ArrayList<String> listeFichierTest;
 
-    public Analyseur(){
-        
+    public Analyseur(String repetoireTest){
+        furefirePath = repetoireTest;
+        listeFichierTest = new ArrayList<>();
     }
     
-    public void AnalyserFichiersTests(String nom){
-        LireXML parser = new LireXML();
-        ArrayList<Test> listTest = parser.lireTest(furefirePath+nom);
+
+    public void AnalyserFichiersTests(){
+        ListerFichierTest();
         
-        System.out.println(listTest.size());
-        for(Test t : listTest){
-            System.out.println(t.display());
+        for(String t : listeFichierTest){
+            System.out.println("\n"+t);
+            LireXML parser = new LireXML();
+            ArrayList<Test> listTest = parser.lireTest(furefirePath+t);
+            
+            for(Test test : listTest){
+                System.out.println("\n"+test.display());
+            }
+        }
+
+    }
+    
+    /**
+     * Permet de trouver les fichier xml dans le dossier qui contient les résultat des tests
+     */
+    private void ListerFichierTest(){
+        File repertoire = new File(furefirePath);  
+        String list[] = repertoire.list();
+        
+        for(String f : list){
+            if(f.endsWith(".xml")==true){
+                listeFichierTest.add(f);
+            }
+            
         }
 
     }

@@ -1,4 +1,4 @@
-package analyse;
+package lecture_ecriture;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -7,7 +7,9 @@ import java.util.List;
 import org.jdom2.Document;  
 import org.jdom2.Element;  
 import org.jdom2.JDOMException;  
-import org.jdom2.input.SAXBuilder;  
+import org.jdom2.input.SAXBuilder;
+
+import analyse.Test;  
 public class LireXML {
 
     
@@ -33,9 +35,7 @@ public class LireXML {
              
              for(Element e : listeTest){
                  Test test = new Test(e.getAttributeValue("name"), e.getAttributeValue("classname"));
-                 System.out.println("fail : "+e.getChild("failure"));
                  if(!e.getChildText("failure").equals(null)){
-                     test.setFail(true);
                      test.setTypeFail(e.getChild("failure").getAttributeValue("type"));
                  }
                  
