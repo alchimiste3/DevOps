@@ -4,7 +4,7 @@ mvn clean install
 
 #launching test
 cd ../SourcesUnderTest
-mvn clean test
+mvn clean test -Dp_chemin=processor.BinaryOperatorMutator
 
 #launching junit ananlyser
 
