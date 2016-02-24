@@ -5,8 +5,13 @@ package package1;
  */
 public class Classe1 {
 
+    private int i;
     public Classe1() {
-        int i=0;
+        i=0;
         i=i+1;
+    }
+
+    public int getI() {
+        return i;
     }
 }
