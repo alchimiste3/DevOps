@@ -2,6 +2,7 @@ package analyse;
 
 import java.io.*;
 import java.util.ArrayList;
+import lecture_ecriture.GenererHTML;
 
 import lecture_ecriture.LireXML;
 
@@ -20,16 +21,18 @@ public class Analyseur {
 
     public void AnalyserFichiersTests(){
         ListerFichierTest();
+        GenererHTML genHTML = new GenererHTML();
         
         for(String t : listeFichierTest){
             System.out.println("\n"+t);
             LireXML parser = new LireXML();
             ArrayList<Test> listTest = parser.lireTest(furefirePath+t);
-            
+            genHTML.genererListeTests(listTest, t);
             for(Test test : listTest){
                 System.out.println("\n"+test.display());
             }
         }
+        genHTML.genererFin();
 
     }
     
