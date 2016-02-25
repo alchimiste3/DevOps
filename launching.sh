@@ -4,11 +4,11 @@ mvn clean install
 
 #launching test
 cd ../SourcesUnderTest
-mvn clean test -Dp_chemin=processor.BinaryOperatorMutator
+mvn clean test -Dp_chemin=processor.IncDec
 
 #launching junit analyser
-cd ../Analysor
-mvn clean install
-mvn exec:java -Dexec.mainClass="main.Main" -e
+#cd ../Analysor
+#mvn clean install
+#mvn exec:java -Dexec.mainClass="main.Main" -e
 
 #cleaning?
