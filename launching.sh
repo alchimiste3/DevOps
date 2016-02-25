@@ -7,8 +7,8 @@ cd ../SourcesUnderTest
 mvn clean test -Dp_chemin=processor.PlusMinus
 
 #launching junit analyser
-#cd ../Analysor
-#mvn clean install
-#mvn exec:java -Dexec.mainClass="main.Main" -e
+cd ../Analysor
+mvn clean install
+mvn exec:java -Dexec.mainClass="main.Main" -e
 
 #cleaning?

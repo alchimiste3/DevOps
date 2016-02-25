@@ -20,8 +20,8 @@ public class GenererHTML {
     private File f;
     private BufferedWriter bw;
 
-    public GenererHTML(String repertoireHTML) {
-        f = new File(repertoireHTML + "result.html");
+    public GenererHTML(String repertoireHTML, String nomFichierHtml) {
+        f = new File(repertoireHTML + nomFichierHtml);
         
         try {
             bw = new BufferedWriter(new FileWriter(f));
@@ -39,7 +39,7 @@ public class GenererHTML {
             
             for (Test test : listeTests){
                 System.out.println("r" + test.toString());
-                if (test.isFail() == false)
+                if (test.isFail() != false)
                     nbFails++;
                 nbTests++;
             }
@@ -61,6 +61,23 @@ public class GenererHTML {
         catch(IOException e){
             System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
         }
+    }
+    
+    public int pourcentageFail(ArrayList<ArrayList<Test>> listeTests){
+        int compteurTestFail = 0;
+        int compteurTest = 0;
+        
+        for (ArrayList<Test> l : listeTests){
+            for (Test test : l){
+                compteurTest++;
+                if (test.isFail() != false){
+                    compteurTestFail++;
+                }
+            }
+            
+        }
+        
+        return (compteurTestFail*100)/compteurTest;
     }
         
     public void genererTableauxTests(ArrayList<Test> listeTests, String nomFichier) {
@@ -105,8 +122,8 @@ public class GenererHTML {
                 
                 bw.write("</tr>");
             }
-
             
+
         } 
         catch(IOException e){
             System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
@@ -120,15 +137,18 @@ public class GenererHTML {
             bw.write("<table border>");
             bw.write("<tr>");
             bw.write("<td>Class Test</td> <td>Test</td> <td>Resultat</td> <td>Type Erreur</td>");
+            bw.write("<h2>Résultats des tests</h2");
             bw.write("</tr>");
         } catch (IOException e) {
             System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
         }
     }
     
-    public void ecrireFinTableau(){
+    public void ecrireFinTableau(ArrayList<ArrayList<Test>> listeTests){
         try {
             bw.write("</tabler>");
+            bw.write("<h4>Pourcentage d'échecs = "+ pourcentageFail(listeTests) +"%</h4");
+
         } catch (IOException e) {
             System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
 

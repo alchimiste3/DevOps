@@ -13,20 +13,24 @@ public class Analyseur {
     
     private String repetoireTest;
     private String repertoireHTML;
-
+    private String nomFichierHtml;
+    
     private ArrayList<String> listeFichierTest;
     
 
-    public Analyseur(String repetoireTest, String repertoireHTML){
+    public Analyseur(String repetoireTest, String repertoireHTML, String nomFichierHtml){
         this.repetoireTest = repetoireTest;
         this.repertoireHTML = repertoireHTML;
+        this.nomFichierHtml = nomFichierHtml;
         listeFichierTest = new ArrayList<String>();
     }
     
 
     public void AnalyserFichiersTests(){
+        ArrayList<ArrayList<Test>> list = new ArrayList();
+        
         ListerFichierTest();
-        GenererHTML genHTML = new GenererHTML(repertoireHTML);
+        GenererHTML genHTML = new GenererHTML(repertoireHTML,nomFichierHtml);
         
         genHTML.ecrireDebut();
         genHTML.ecrireDebutTableau();
@@ -35,7 +39,7 @@ public class Analyseur {
             System.out.println("\n"+t);
             LireXML parser = new LireXML();
             ArrayList<Test> listTest = parser.lireTest(repetoireTest+t);
-                        
+            list.add(listTest);
             genHTML.genererTableauxTests(listTest, t);
 
             for(Test test : listTest){
@@ -43,7 +47,7 @@ public class Analyseur {
             }
         }
         
-        genHTML.ecrireFinTableau();
+        genHTML.ecrireFinTableau(list);
         genHTML.ecrireFin();
     }
     
