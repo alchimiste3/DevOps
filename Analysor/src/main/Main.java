@@ -13,7 +13,7 @@ public class Main {
         
         if(args.length >= 2){
             dossierTestXML = args[0];
-            dossierHTML = args[0];
+            dossierHTML = args[1];
         }
         
         Analyseur analyseur = new Analyseur(dossierTestXML,dossierHTML);

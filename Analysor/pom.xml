@@ -3,7 +3,11 @@
   <groupId>Analysor</groupId>
   <artifactId>Analysor</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
+
+  <properties>
+      <xml_source>../SourcesUnderTest/target/surefire-reports/</xml_source>
+      <html_dest>../results/</html_dest>
+  </properties>
   <dependencies>
   <dependency>
 	<groupId>org.jdom</groupId>
@@ -21,6 +25,26 @@
             <configuration>
                 <executable>/usr/lib/jvm/java-8-oracle/</executable>
                 <compilerVersion>1.8</compilerVersion>
+            </configuration>
+        </plugin>
+
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.2.1</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>java</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <mainClass>main.Main</mainClass>
+                <arguments>
+                    <argument>${xml_source}</argument>
+                    <argument>${html_dest}</argument>
+                </arguments>
             </configuration>
         </plugin>
     </plugins>

@@ -17,4 +17,12 @@ public class Classe1Test {
         Assert.assertEquals(k,c.getI());
         System.out.println("@Test - testEmptyCollection");
     }
+
+    @Test
+    public void testClasse11() {
+        Classe1 c = new Classe1();
+        int k = 1;
+        Assert.assertEquals(k,c.getI());
+        System.out.println("@Test - testEmptyCollection");
+    }
 }

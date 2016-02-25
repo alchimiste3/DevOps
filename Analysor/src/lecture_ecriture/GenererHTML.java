@@ -82,8 +82,10 @@ public class GenererHTML {
             bw.write("<td rowspan="+ listeTests.size() +">"+ listeTests.get(0).getNomClass()+"</td>");
             bw.write("<td>"+listeTests.get(0).getNom()+"</td>");
             
-            if(listeTests.get(0).isFail())bw.write("<td class=\"fail\" >echec</td><td class=\"fail\">"+listeTests.get(0).isTypeFail()+"</td>");
-            else bw.write("<td class=\"nofail\">reussie</td><td class=\"nofail\"></td>");
+            if(listeTests.get(0).isFail())
+                bw.write("<td class=\"fail\" >echec</td><td class=\"fail\">"+listeTests.get(0).isTypeFail()+"</td>");
+            else
+                bw.write("<td class=\"nofail\">reussie</td><td class=\"nofail\"></td>");
             
             
             bw.write("</tr>");
@@ -95,8 +97,10 @@ public class GenererHTML {
                 bw.write("<tr>");
                 bw.write("<td>"+test.getNom()+"</td>");
                 
-                if(!test.isFail())bw.write("<td class=\"fail\" >echec</td><td class=\"fail\">"+test.isTypeFail()+"</td>");
-                else bw.write("<td class=\"nofail\">reussie</td><td class=\"nofail\"></td>");
+                if(test.isFail())
+                    bw.write("<td class=\"fail\" >echec</td><td class=\"fail\">"+test.isTypeFail()+"</td>");
+                else
+                    bw.write("<td class=\"nofail\">reussie</td><td class=\"nofail\"></td>");
             
                 
                 bw.write("</tr>");
