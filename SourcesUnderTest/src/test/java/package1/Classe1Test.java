@@ -11,18 +11,14 @@ import java.util.*;
 public class Classe1Test {
 
     @Test
-    public void testClasse1() {
+    public void testJ() {
         Classe1 c = new Classe1();
-        int k = 1;
-        Assert.assertEquals(k,c.getI());
-        System.out.println("@Test - testEmptyCollection");
+        Assert.assertEquals(1,c.getJ());
     }
 
     @Test
-    public void testClasse11() {
+    public void testK() {
         Classe1 c = new Classe1();
-        int k = 1;
-        Assert.assertEquals(k,c.getI());
-        System.out.println("@Test - testEmptyCollection");
+        Assert.assertEquals(1,c.getK());
     }
 }
