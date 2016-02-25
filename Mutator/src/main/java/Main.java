@@ -1,11 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 
-import processor.BinaryOperatorMutator;
-
-
-
-
+import processor.PlusMinus;
 
 
 /**
@@ -53,7 +49,7 @@ public class Main {
         
             System.out.println("Application de la mutation sur le fichier" + src + "/MaPremiereClasse.java");
             
-            BinaryOperatorMutator mutationOperator = new BinaryOperatorMutator();
+            PlusMinus mutationOperator = new PlusMinus();
             
             MutationTester mutationTester = new MutationTester(src + "/MaPremiereClasse.java", mutationOperator);
             

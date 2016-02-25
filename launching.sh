@@ -4,7 +4,7 @@ mvn clean install
 
 #launching test
 cd ../SourcesUnderTest
-mvn clean test -Dp_chemin=processor.IncDec
+mvn clean test -Dp_chemin=processor.PlusMinus
 
 #launching junit analyser
 #cd ../Analysor

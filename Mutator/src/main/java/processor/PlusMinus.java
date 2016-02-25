@@ -1,12 +1,11 @@
 package processor;
 
 import spoon.processing.AbstractProcessor;
-import spoon.processing.ProcessingManager;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.declaration.CtElement;
 
-public class BinaryOperatorMutator extends AbstractProcessor<CtElement> {
+public class PlusMinus extends AbstractProcessor<CtElement> {
 	@Override
 	public boolean isToBeProcessed(CtElement candidate) {
 		return candidate instanceof CtBinaryOperator;
@@ -17,13 +16,20 @@ public class BinaryOperatorMutator extends AbstractProcessor<CtElement> {
 		if (!(candidate instanceof CtBinaryOperator)) {
 			return;
 		}
-		CtBinaryOperator op = (CtBinaryOperator)candidate;
-		op.setKind(BinaryOperatorKind.MINUS);
-	}
+        else if (((CtBinaryOperator)candidate).getKind()==BinaryOperatorKind.PLUS) {
+            CtBinaryOperator op = (CtBinaryOperator)candidate;
+            op.setKind(BinaryOperatorKind.MINUS);
+        }
+        else if (((CtBinaryOperator)candidate).getKind()==BinaryOperatorKind.MINUS) {
+            CtBinaryOperator op = (CtBinaryOperator)candidate;
+            op.setKind(BinaryOperatorKind.PLUS);
+        }
 
+	}
+/*
     @Override
     public void processingDone() {
         ProcessingManager p = this.getEnvironment().getManager();
-        p.addProcessor(Binary2.class);
-    }
+        p.addProcessor(IncDec.class);
+    }*/
 }

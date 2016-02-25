@@ -1,9 +1,6 @@
 package processor;
 
 import spoon.processing.AbstractProcessor;
-import spoon.processing.ProcessingManager;
-import spoon.reflect.code.BinaryOperatorKind;
-import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtUnaryOperator;
 import spoon.reflect.code.UnaryOperatorKind;
 import spoon.reflect.declaration.CtElement;
@@ -18,10 +15,17 @@ public class IncDec extends AbstractProcessor<CtElement> {
 
     @Override
     public void process(CtElement candidate) {
-        if (!(candidate instanceof CtUnaryOperator && ((CtUnaryOperator)candidate).getKind()==UnaryOperatorKind.POSTINC)) {
+        if (!(candidate instanceof CtUnaryOperator)) {
             return;
         }
-        CtUnaryOperator op = (CtUnaryOperator)candidate;
-        op.setKind(UnaryOperatorKind.POSTDEC);
+        else if(((CtUnaryOperator)candidate).getKind()==UnaryOperatorKind.POSTINC) {
+            CtUnaryOperator op = (CtUnaryOperator)candidate;
+            op.setKind(UnaryOperatorKind.POSTDEC);
+        }
+        else if(((CtUnaryOperator)candidate).getKind()==UnaryOperatorKind.POSTDEC) {
+            CtUnaryOperator op = (CtUnaryOperator)candidate;
+            op.setKind(UnaryOperatorKind.POSTINC);
+        }
+
     }
 }
