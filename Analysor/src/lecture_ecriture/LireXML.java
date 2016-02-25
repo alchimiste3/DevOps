@@ -19,7 +19,7 @@ public class LireXML {
 
     public ArrayList<Test> lireTest(String path){  
         
-        ArrayList<Test> listTest = new ArrayList<>();
+        ArrayList<Test> listTest = new ArrayList<Test>();
         
          SAXBuilder saxBuilder = new SAXBuilder();  
        

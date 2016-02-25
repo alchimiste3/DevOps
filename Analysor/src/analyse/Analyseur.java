@@ -18,7 +18,7 @@ public class Analyseur {
 
     public Analyseur(String repetoireTest){
         furefirePath = repetoireTest;
-        listeFichierTest = new ArrayList<>();
+        listeFichierTest = new ArrayList<String>();
     }
     
 
