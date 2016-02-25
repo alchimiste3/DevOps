@@ -4,8 +4,19 @@ import analyse.Analyseur;
 
 public class Main {
 
+
+    
     public static void main(String[] args) {
-        Analyseur analyseur = new Analyseur("surefire-reports/");
+        
+        String dossierTestXML = "surefire-reports/";
+        String dossierHTML = "surefire-reports/";
+        
+        if(args.length >= 2){
+            dossierTestXML = args[0];
+            dossierHTML = args[0];
+        }
+        
+        Analyseur analyseur = new Analyseur(dossierTestXML,dossierHTML);
         analyseur.AnalyserFichiersTests();
     }
 }

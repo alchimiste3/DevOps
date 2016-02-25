@@ -20,13 +20,14 @@ public class GenererHTML {
     private File f;
     private BufferedWriter bw;
 
-    public GenererHTML() {
-        f = new File("surefire-reports/result.html");
+    public GenererHTML(String repertoireHTML) {
+        f = new File(repertoireHTML + "result.html");
+        
         try {
             bw = new BufferedWriter(new FileWriter(f));
         }
         catch(IOException e) {
-            System.out.println("Impossible de creer le fichier de resultats" + e.getStackTrace());
+            System.out.println("Le dossier pour ajouter le html n'a pas était trouvé" + e.getStackTrace());
         }
     }
 

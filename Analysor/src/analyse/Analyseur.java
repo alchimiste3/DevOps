@@ -11,20 +11,22 @@ import lecture_ecriture.LireXML;
 
 public class Analyseur {
     
-    private String furefirePath;
-    
+    private String repetoireTest;
+    private String repertoireHTML;
+
     private ArrayList<String> listeFichierTest;
     
 
-    public Analyseur(String repetoireTest){
-        furefirePath = repetoireTest;
+    public Analyseur(String repetoireTest, String repertoireHTML){
+        this.repetoireTest = repetoireTest;
+        this.repertoireHTML = repertoireHTML;
         listeFichierTest = new ArrayList<String>();
     }
     
 
     public void AnalyserFichiersTests(){
         ListerFichierTest();
-        GenererHTML genHTML = new GenererHTML();
+        GenererHTML genHTML = new GenererHTML(repertoireHTML);
         
         genHTML.ecrireDebut();
         genHTML.ecrireDebutTableau();
@@ -32,7 +34,7 @@ public class Analyseur {
         for(String t : listeFichierTest){
             System.out.println("\n"+t);
             LireXML parser = new LireXML();
-            ArrayList<Test> listTest = parser.lireTest(furefirePath+t);
+            ArrayList<Test> listTest = parser.lireTest(repetoireTest+t);
                         
             genHTML.genererTableauxTests(listTest, t);
 
@@ -49,7 +51,7 @@ public class Analyseur {
      * Permet de trouver les fichier xml dans le dossier qui contient les résultat des tests
      */
     private void ListerFichierTest(){
-        File repertoire = new File(furefirePath);  
+        File repertoire = new File(repetoireTest);  
         String list[] = repertoire.list();
         
         for(String f : list){
