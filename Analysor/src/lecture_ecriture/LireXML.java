@@ -35,12 +35,21 @@ public class LireXML {
              
              for(Element e : listeTest){
                  Test test = new Test(e.getAttributeValue("name"), e.getAttributeValue("classname"));
-                 if(!e.getChildText("failure").equals(null)){
+                 
+                 if(e.getChildText("failure") != null){
+                     test.setFail(true);
                      test.setTypeFail(e.getChild("failure").getAttributeValue("type"));
                  }
+                 else{
+                     test.setFail(false);
+                 }
+                 
+                 
+                 System.out.println("sdfsfrgdrdededeedr");
                  
                  listTest.add(test);
              }
+  
 
          } catch (Exception e) {  
                  e.printStackTrace();  

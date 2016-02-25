@@ -2,6 +2,8 @@ package analyse;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import lecture_ecriture.GenererHTML;
 
 import lecture_ecriture.LireXML;
@@ -12,6 +14,7 @@ public class Analyseur {
     private String furefirePath;
     
     private ArrayList<String> listeFichierTest;
+    
 
     public Analyseur(String repetoireTest){
         furefirePath = repetoireTest;
@@ -23,17 +26,23 @@ public class Analyseur {
         ListerFichierTest();
         GenererHTML genHTML = new GenererHTML();
         
+        genHTML.ecrireDebut();
+        genHTML.ecrireDebutTableau();
+        
         for(String t : listeFichierTest){
             System.out.println("\n"+t);
             LireXML parser = new LireXML();
             ArrayList<Test> listTest = parser.lireTest(furefirePath+t);
-            genHTML.genererListeTests(listTest, t);
+                        
+            genHTML.genererTableauxTests(listTest, t);
+
             for(Test test : listTest){
                 System.out.println("\n"+test.display());
             }
         }
-        genHTML.genererFin();
-
+        
+        genHTML.ecrireFinTableau();
+        genHTML.ecrireFin();
     }
     
     /**
