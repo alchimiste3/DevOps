@@ -26,10 +26,4 @@ public class PlusMinus extends AbstractProcessor<CtElement> {
         }
 
 	}
-/*
-    @Override
-    public void processingDone() {
-        ProcessingManager p = this.getEnvironment().getManager();
-        p.addProcessor(IncDec.class);
-    }*/
 }

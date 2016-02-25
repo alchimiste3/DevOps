@@ -7,7 +7,9 @@
   <properties>
       <xml_source>../SourcesUnderTest/target/surefire-reports/</xml_source>
       <html_dest>../results/</html_dest>
+      <nom_fichier>result.html</nom_fichier>
   </properties>
+
   <dependencies>
   <dependency>
 	<groupId>org.jdom</groupId>
@@ -44,6 +46,7 @@
                 <arguments>
                     <argument>${xml_source}</argument>
                     <argument>${html_dest}</argument>
+                    <argument>${nom_fichier}</argument>
                 </arguments>
             </configuration>
         </plugin>
