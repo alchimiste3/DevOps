@@ -77,6 +77,9 @@ public class GenererHTML {
             
         }
         
+        if(compteurTest == 0){
+            return 0;
+        }
         return (compteurTestFail*100)/compteurTest;
     }
         

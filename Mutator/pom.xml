@@ -4,6 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+  <properties>
+      <xml_source>../SourcesUnderTest/target/surefire-reports/</xml_source>
+      <html_dest>../results/</html_dest>
+      <nom_fichier>result.html</nom_fichier>
+  </properties>
+
     <groupId>groupId</groupId>
     <artifactId>Mutator</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -13,6 +19,11 @@
 			<artifactId>spoon-core</artifactId>
 			<version>5.0.2</version>
 		</dependency>
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>jdom2</artifactId>
+            <version>2.0.5</version>
+        </dependency>
 	</dependencies>
 
     <build>
@@ -23,6 +34,27 @@
                 <configuration>
                     <executable>/usr/lib/jvm/java-8-oracle/</executable>
                     <compilerVersion>1.8</compilerVersion>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>main.Main</mainClass>
+                    <arguments>
+                        <argument>${xml_source}</argument>
+                        <argument>${html_dest}</argument>
+                        <argument>${nom_fichier}</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>
