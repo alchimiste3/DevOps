@@ -19,6 +19,7 @@
 			<artifactId>spoon-core</artifactId>
 			<version>5.0.2</version>
 		</dependency>
+
         <dependency>
             <groupId>org.jdom</groupId>
             <artifactId>jdom2</artifactId>
@@ -34,27 +35,6 @@
                 <configuration>
                     <executable>/usr/lib/jvm/java-8-oracle/</executable>
                     <compilerVersion>1.8</compilerVersion>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <mainClass>main.Main</mainClass>
-                    <arguments>
-                        <argument>${xml_source}</argument>
-                        <argument>${html_dest}</argument>
-                        <argument>${nom_fichier}</argument>
-                    </arguments>
                 </configuration>
             </plugin>
         </plugins>

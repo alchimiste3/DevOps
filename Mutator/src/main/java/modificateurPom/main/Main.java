@@ -1,8 +1,8 @@
-package main;
+package modificateurPom.main;
+
+import modificateurPom.modificateur.ModificateurPom;
 
 import java.util.ArrayList;
-
-import modificateur.ModificateurPom;
 
 public class Main {
 
@@ -12,7 +12,7 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        String pathPom = "../SourcesUnderTest/pom.xml";
+        String pathPom = "/home/sualty/Bureau/DEVOPS/V1.1/DevOps/SourcesUnderTest/pom.xml";
         ArrayList<String> listeProc = new ArrayList<String>();
         
         for(String proc : args){

@@ -1,4 +1,4 @@
-package analyse;
+package analyseur.analyse;
 
 public class Test {
     

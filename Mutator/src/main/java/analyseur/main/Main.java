@@ -1,6 +1,6 @@
-package main;
+package analyseur.main;
 
-import analyse.Analyseur;
+import analyseur.analyse.Analyseur;
 
 public class Main {
 

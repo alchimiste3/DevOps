@@ -1,4 +1,4 @@
-package lecture_ecriture;
+package analyseur.lecture_ecriture;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;  
 import org.jdom2.input.SAXBuilder;
 
-import analyse.Test;  
+import analyseur.analyse.Test;
 public class LireXML {
 
     

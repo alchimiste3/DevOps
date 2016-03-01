@@ -1,12 +1,11 @@
-package analyse;
+package analyseur.analyse;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import lecture_ecriture.GenererHTML;
+import analyseur.lecture_ecriture.GenererHTML;
 
-import lecture_ecriture.LireXML;
+import analyseur.lecture_ecriture.LireXML;
 
 
 public class Analyseur {

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lecture_ecriture;
+package analyseur.lecture_ecriture;
 
-import analyse.Test;
+import analyseur.analyse.Test;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
