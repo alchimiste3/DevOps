@@ -8,15 +8,16 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModificateurPom {
     
-    File file;
-    Document document;
-    Namespace namespace = Namespace.getNamespace("http://maven.apache.org/POM/4.0.0");
+    private File file;
+    private Document document;
+    private Namespace namespace = Namespace.getNamespace("http://maven.apache.org/POM/4.0.0");
 
     public void modifierProcessors(ArrayList<String> listeProc, String pathPom){
         System.out.println("salut");
@@ -39,7 +40,7 @@ public class ModificateurPom {
 
             ajouterProc(processors,listeProc);
            
-            sauvagarder();
+            sauvagarder(pathPom);
             
         }
         catch(Exception e){
@@ -48,10 +49,11 @@ public class ModificateurPom {
         
     }
     
-    private void sauvagarder() throws IOException{
-        // On sauvegarde les modification 
+    private void sauvagarder(String pathPom) throws IOException{
+        // On sauvegarde les modification
         XMLOutputter outputter = new XMLOutputter();
         outputter.setFormat(Format.getPrettyFormat());
+        outputter.output(document, new FileOutputStream(pathPom));
         outputter.output(document, System.out);
     }
     
