@@ -21,12 +21,19 @@ import java.util.ArrayList;
 public class GenererHTML {
     private File f;
     private BufferedWriter bw;
+    private FileWriter fileWriter;
 
     public GenererHTML(String repertoireHTML, String nomFichierHtml) {
         f = new File(repertoireHTML + nomFichierHtml);
+        boolean debut = false;
+        if (!f.exists())
+               debut = true;
         
         try {
-            bw = new BufferedWriter(new FileWriter(f));
+            fileWriter = new FileWriter(f.getAbsolutePath(),true);
+            bw = new BufferedWriter(fileWriter);
+            if (debut)
+                ecrireDebut();
         }
         catch(IOException e) {
             System.out.println("Le dossier pour ajouter le html n'a pas était trouvé" + e.getStackTrace());
