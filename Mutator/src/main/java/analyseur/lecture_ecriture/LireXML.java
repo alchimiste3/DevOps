@@ -10,6 +10,7 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 import analyseur.analyse.Test;
+import analyseur.analyse.TestsParClass;
 public class LireXML {
 
     
@@ -17,10 +18,10 @@ public class LireXML {
         
     }
 
-    public ArrayList<Test> lireTest(String path){  
+    public TestsParClass lireTests(String path){  
         
-        ArrayList<Test> listTest = new ArrayList<Test>();
-        
+        TestsParClass testClass = new TestsParClass();
+                
          SAXBuilder saxBuilder = new SAXBuilder();  
        
          File file = new File(path);  
@@ -29,7 +30,17 @@ public class LireXML {
              Document document = saxBuilder.build(file);  
          
              Element rootNode = document.getRootElement(); 
-                      
+             
+             
+             //On recupere les imformation general sur le deroulement des tests de la class test.
+             testClass.setNombreTest(rootNode.getAttributeValue("tests"));
+             testClass.setNomClass(rootNode.getAttributeValue("name"));
+             testClass.setTempsExecution(rootNode.getAttributeValue("time"));
+             testClass.setNombreTestFails(rootNode.getAttributeValue("failures"));
+             testClass.setNombreTestErrors(rootNode.getAttributeValue("errors"));
+             testClass.setNombreTestSkipped(rootNode.getAttributeValue("skipped"));
+             
+                                  
              List<Element> listeTest = rootNode.getChildren("testcase");  
         
              
@@ -47,7 +58,7 @@ public class LireXML {
                  
                  System.out.println("sdfsfrgdrdededeedr");
                  
-                 listTest.add(test);
+                 testClass.addTest(test);
              }
   
 
@@ -55,6 +66,9 @@ public class LireXML {
                  e.printStackTrace();  
          }  
          
-         return listTest;
+         
+         
+         
+         return testClass;
      }
 }  

@@ -35,15 +35,13 @@ public class Analyseur {
         genHTML.ecrireDebutTableau();
         
         for(String t : listeFichierTest){
+            
             System.out.println("\n"+t);
             LireXML parser = new LireXML();
-            ArrayList<Test> listTest = parser.lireTest(repetoireTest+t);
-            list.add(listTest);
-            genHTML.genererTableauxTests(listTest, t);
+            
+            TestsParClass testClass = parser.lireTests(repetoireTest+t);
+            genHTML.genererTableauxTests(testClass, t);
 
-            for(Test test : listTest){
-                System.out.println("\n"+test.display());
-            }
         }
         
         genHTML.ecrireFinTableau(list);

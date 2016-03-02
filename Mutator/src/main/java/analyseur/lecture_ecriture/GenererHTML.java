@@ -6,6 +6,8 @@
 package analyseur.lecture_ecriture;
 
 import analyseur.analyse.Test;
+import analyseur.analyse.TestsParClass;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -83,11 +85,13 @@ public class GenererHTML {
         return (compteurTestFail*100)/compteurTest;
     }
         
-    public void genererTableauxTests(ArrayList<Test> listeTests, String nomFichier) {
+    public void genererTableauxTests(TestsParClass testClass, String nomFichier) {
         try {
             
             int nbFails = 0;
             int nbTests = 0;
+            
+            ArrayList<Test> listeTests = testClass.getListeTests();
             
             for (Test test : listeTests){
                 System.out.println("r" + test.toString());
@@ -96,10 +100,16 @@ public class GenererHTML {
                 nbTests++;
             }
             
-            //On parcourt le premier test en ajoutant le nom de la class
+            
+            //<td>Nombre de Test</td> <td>Temps d'execution</td> <td>Tests ignore</td>
+            
             
             bw.write("<tr>");
-            bw.write("<td rowspan="+ listeTests.size() +">"+ listeTests.get(0).getNomClass()+"</td>");
+            bw.write("<td rowspan="+ testClass.getNombreTest() +">"+ testClass.getNomClass() +"</td>");
+            bw.write("<td rowspan="+ testClass.getNombreTest() +">"+ testClass.getNombreTest()+"</td>");
+            bw.write("<td rowspan="+ testClass.getNombreTest() +">"+ testClass.getTempsExecution()+" s</td>");
+            bw.write("<td rowspan="+ testClass.getNombreTest() +">"+ testClass.getNombreTestSkipped()+"</td>");
+
             bw.write("<td>"+listeTests.get(0).getNom()+"</td>");
             
             if(listeTests.get(0).isFail())
@@ -109,6 +119,7 @@ public class GenererHTML {
             
             
             bw.write("</tr>");
+            
             
             //On parcourt les autres test
             for (int i = 1; i< listeTests.size() ; i++){
@@ -137,9 +148,10 @@ public class GenererHTML {
     
     public void ecrireDebutTableau(){
         try {
+            
             bw.write("<table border>");
             bw.write("<tr>");
-            bw.write("<td>Class Test</td> <td>Test</td> <td>Resultat</td> <td>Type Erreur</td>");
+            bw.write("<td>Class Test</td> <td>Nombre de tests</td> <td>Temps d'execution</td> <td>Tests ignorés</td> <td>Test</td> <td>Resultat</td> <td>Type Erreur</td>");
             bw.write("<h2>Résultats des tests</h2");
             bw.write("</tr>");
         } catch (IOException e) {
