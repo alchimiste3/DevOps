@@ -2,7 +2,7 @@
 pathOfProject="/home/sualty/Bureau/DEVOPS/V2/DevOps/SourcesUnderTest/"
 pathOfPom="/home/sualty/Bureau/DEVOPS/V2/DevOps/SourcesUnderTest/pom.xml"
 pathOfSurefireReports="/home/sualty/Bureau/DEVOPS/V2/DevOps/SourcesUnderTest/target/surefire-reports/"
-pathOfResultsDirectory="../results/"
+pathOfResultsDirectory="/home/sualty/Bureau/DEVOPS/V2/DevOps/results/"
 nameOfResultFile="result.html"
 
 #removing last test
