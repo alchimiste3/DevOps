@@ -49,6 +49,7 @@
         </executions>
         <configuration>
           <processors>
+            <processor>processor./home/sualty/Bureau/DEVOPS/V2/DevOps/SourcesUnderTest/pom.xml</processor>
             <processor>processor.IncDec</processor>
             <processor>processor.PlusMinus</processor>
             <processor>processor.GELE</processor>

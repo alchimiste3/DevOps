@@ -12,11 +12,11 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        String pathPom = "/home/sualty/Bureau/DEVOPS/V2/DevOps/SourcesUnderTest/pom.xml";
+        String pathPom = args[0];
         ArrayList<String> listeProc = new ArrayList<String>();
         
-        for(String proc : args){
-            listeProc.add(proc);
+        for(int i=0;i<args.length;i++){
+            listeProc.add(args[i]);
         }
         
         //listeProc.add("eqded");

@@ -1,4 +1,9 @@
 #!/bin/bash
+pathOfProject="/home/sualty/Bureau/DEVOPS/V2/DevOps/SourcesUnderTest/"
+pathOfPom="/home/sualty/Bureau/DEVOPS/V2/DevOps/SourcesUnderTest/pom.xml"
+pathOfSurefireReports="/home/sualty/Bureau/DEVOPS/V2/DevOps/SourcesUnderTest/target/surefire-reports/"
+pathOfResultsDirectory="../results/"
+nameOfResultFile="result.html"
 
 #removing last test
 rm -f ./results/result.html
@@ -15,7 +20,7 @@ do
 	nameOfTest=$( echo "$paths" | tr ' ' '+')
 
 	#modifying pom
-	mvn -q exec:java -Dexec.mainClass=modificateurPom.main.Main -Dexec.args="$paths"
+	mvn -q exec:java -Dexec.mainClass=modificateurPom.main.Main -Dexec.args="$pathOfPom $paths"
 
 	#launching test
 	cd ../SourcesUnderTest
@@ -23,5 +28,5 @@ do
 
 	#analysing
 	cd ../Mutator
-	mvn -q exec:java -Dexec.mainClass=analyseur.main.Main -Dexec.args="../SourcesUnderTest/target/surefire-reports/ ../results/ result.html $nameOfTest"
+	mvn -q exec:java -Dexec.mainClass=analyseur.main.Main -Dexec.args="$pathOfSurefireReports $pathOfResultsDirectory $nameOfResultFile $nameOfTest"
 done
