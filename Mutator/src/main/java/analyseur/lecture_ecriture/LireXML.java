@@ -54,9 +54,7 @@ public class LireXML {
                  else{
                      test.setFail(false);
                  }
-                 
-                 
-                 System.out.println("sdfsfrgdrdededeedr");
+
                  
                  testClass.addTest(test);
              }

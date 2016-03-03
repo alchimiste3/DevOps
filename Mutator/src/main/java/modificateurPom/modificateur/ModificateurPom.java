@@ -20,7 +20,6 @@ public class ModificateurPom {
     private Namespace namespace = Namespace.getNamespace("http://maven.apache.org/POM/4.0.0");
 
     public void modifierProcessors(ArrayList<String> listeProc, String pathPom){
-        System.out.println("salut");
         SAXBuilder saxBuilder = new SAXBuilder();  
         
         file = new File(pathPom);  
@@ -54,7 +53,6 @@ public class ModificateurPom {
         XMLOutputter outputter = new XMLOutputter();
         outputter.setFormat(Format.getPrettyFormat());
         outputter.output(document, new FileOutputStream(pathPom));
-        outputter.output(document, System.out);
     }
     
     private void supprimerProc(Element processors){
@@ -63,7 +61,6 @@ public class ModificateurPom {
     
     private void ajouterProc(Element processors, ArrayList<String> listeProc){
         for(String proc : listeProc){
-            System.out.println("salutqeeffzef");
             Element newProc = new Element("processor", namespace);
             newProc.setText("processor."+proc);
             processors.addContent(newProc);

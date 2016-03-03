@@ -47,7 +47,6 @@ public class GenererHTML {
             int nbTests = 0;
             
             for (Test test : listeTests){
-                System.out.println("r" + test.toString());
                 if (test.isFail() != false)
                     nbFails++;
                 nbTests++;
@@ -101,7 +100,6 @@ public class GenererHTML {
             ArrayList<Test> listeTests = testClass.getListeTests();
             
             for (Test test : listeTests){
-                System.out.println("r" + test.toString());
                 if (test.isFail() == false)
                     nbFails++;
                 nbTests++;
@@ -153,13 +151,13 @@ public class GenererHTML {
         
     }
     
-    public void ecrireDebutTableau(){
+    public void ecrireDebutTableau(String nomSerieTest){
         try {
             
             bw.write("<table border>");
             bw.write("<tr>");
             bw.write("<td>Class Test</td> <td>Nombre de tests</td> <td>Temps d'execution</td> <td>Tests ignorés</td> <td>Test</td> <td>Resultat</td> <td>Type Erreur</td>");
-            bw.write("<h2>Résultats des tests</h2");
+            bw.write("<h2>Résultats de la série de tests \""+nomSerieTest+"\"</h2");
             bw.write("</tr>");
         } catch (IOException e) {
             System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());

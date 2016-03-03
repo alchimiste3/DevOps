@@ -1,5 +1,4 @@
-PlusMinus GELE IncDec
-PlusMinus
-GELE
+PlusMinus GELE
+PlusMinus PlusMinus
 IncDec
-PlusMinus IncDec
+IncDec PlusMinus GELE IncDec GELE
