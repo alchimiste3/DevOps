@@ -49,6 +49,7 @@
         </executions>
         <configuration>
           <processors>
+            <processor>processor.IncDec</processor>
           </processors>
         </configuration>
       </plugin>

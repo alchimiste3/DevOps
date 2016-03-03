@@ -12,7 +12,7 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        String pathPom = "/home/sualty/Bureau/DEVOPS/V1.1/DevOps/SourcesUnderTest/pom.xml";
+        String pathPom = "/home/sualty/Bureau/DEVOPS/V2/DevOps/SourcesUnderTest/pom.xml";
         ArrayList<String> listeProc = new ArrayList<String>();
         
         for(String proc : args){
