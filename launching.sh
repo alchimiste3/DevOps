@@ -1,10 +1,5 @@
 #!/bin/bash
-#processors to be applied : reading file processors.txt for getting them : USER FRIENDLY <3
-value=$(<processors.txt)
-echo "$value"
-#TODO : IL FAUT MODIFIER LA BOUCLE POUR PLACER DANS LE TABLEAU PATH CE QU ON VEUT.UNE LIGNE
-#DU FICHIER PROCESSORS CORRESPOND A UNE ITERATION .
-paths=(PlusMinus GELE IncDec);
+
 #removing last test
 rm -f ./results/result.html
 #creating dependency
@@ -12,10 +7,11 @@ cd ./Mutator
 mvn clean install
 
 #launching tests with one processor
-for p in ${!paths[@]}  
+for (( i=0; i<=$(wc -l < ../processors.txt) ; i++ ))
 do
+	paths=$(sed -n "$((i+1))p;" < ../processors.txt)
 	#modifying pom
-	mvn exec:java -Dexec.mainClass=modificateurPom.main.Main -Dexec.args="${paths[p]}"
+	mvn exec:java -Dexec.mainClass=modificateurPom.main.Main -Dexec.args="$paths"
 
 	#launching test
 	cd ../SourcesUnderTest
