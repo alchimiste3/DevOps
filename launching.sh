@@ -1,15 +1,15 @@
 #!/bin/bash
 #processors to be applied
 paths=(PlusMinus GELE IncDec);
-
+rm -f ./results/result.html
 #creating dependency
 cd ./Mutator
+
 mvn clean install
-mvn exec:java -Dexec.mainClass=modificateurPom.main.Main -Dexec.args="PlusMinus GELE IncDec"
+mvn exec:java -Dexec.mainClass=modificateurPom.main.Main -Dexec.args="PlusMinus"
 
 #launching test
 cd ../SourcesUnderTest
-mvn clean install
 mvn clean test
 
 cd ../Mutator

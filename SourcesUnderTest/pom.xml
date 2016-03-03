@@ -49,9 +49,6 @@
         </executions>
         <configuration>
           <processors>
-            <processor>processor.PlusMinus</processor>
-            <processor>processor.GELE</processor>
-            <processor>processor.IncDec</processor>
           </processors>
         </configuration>
       </plugin>
