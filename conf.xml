@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mutants>
+	<mutant>
+    <processors>
+    	<processor>
+      		<nom>PlusMinus</nom>
+      		<package>
+      			<nom>package1</nom>
+      			<class>
+      				<nom>Class1</nom>
+      				<methode>getJ</methode> <!-- On applique les modifications sur cette methode-->
+      				<methode>...</methode>
+      			</class>
+      			<class>
+      				<nom>Class2</nom> <!-- ici on selection toute la class -->
+      			</class>
+      		</package>
+      	</processor>
+		<processor>GELE</processor>
+	</processors>
+  </mutant>
+</mutants>
