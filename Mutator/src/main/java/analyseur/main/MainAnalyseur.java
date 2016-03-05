@@ -2,7 +2,7 @@ package analyseur.main;
 
 import analyseur.analyse.Analyseur;
 
-public class Main {
+public class MainAnalyseur {
 
 
     
@@ -12,7 +12,7 @@ public class Main {
         String dossierHTML = "surefire-reports/";
         String nomFichierHtml = "result.html";
         String nomSerieTest = "nom de test par défaut";
-
+        String nomFichierMutantXML = "listeMutant.xml";
         
         if(args.length >= 3){
             dossierTestXML = args[0];
@@ -21,7 +21,7 @@ public class Main {
             nomSerieTest = args[3];
         }
         
-        Analyseur analyseur = new Analyseur(dossierTestXML,dossierHTML, nomFichierHtml,nomSerieTest);
+        Analyseur analyseur = new Analyseur(dossierTestXML,dossierHTML, nomFichierHtml,nomSerieTest,nomFichierMutantXML);
         analyseur.AnalyserFichiersTests();
     }
 }

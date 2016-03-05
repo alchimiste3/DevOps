@@ -1,15 +1,18 @@
 #!/bin/bash
-pathOfProject="/home/sualty/Bureau/DEVOPS/V2/DevOps/SourcesUnderTest/"
-pathOfPom="/home/sualty/Bureau/DEVOPS/V2/DevOps/SourcesUnderTest/pom.xml"
-pathOfSurefireReports="/home/sualty/Bureau/DEVOPS/V2/DevOps/SourcesUnderTest/target/surefire-reports/"
-pathOfResultsDirectory="/home/sualty/Bureau/DEVOPS/V2/DevOps/results/"
+pathOfProject="/home/user/DevOps/DevOps/SourcesUnderTest/"
+pathOfPom="/home/user/DevOps/DevOps/SourcesUnderTest/pom.xml"
+pathOfSurefireReports="/home/user/DevOps/DevOps/SourcesUnderTest/target/surefire-reports/"
+pathOfResultsDirectory="/home/user/DevOps/DevOps/results/"
+pathOfXMLMutant="/home/user/DevOps/DevOps/Mutator/listeMutant.xml"
 nameOfResultFile="result.html"
 
 #removing last test
 rm -f ./results/result.html
 #creating dependency
 cd ./Mutator
-mvn -q clean install
+mvn clean install
+
+mvn exec:java -Dexec.mainClass=analyseur.main.MainInitiale -Dexec.args="$pathOfResultsDirectory $nameOfResultFile $pathOfXMLMutant"
 
 #launching tests with one processor
 for (( i=0; i<=$(wc -l < ../processors.txt) ; i++ ))
@@ -28,5 +31,7 @@ do
 
 	#analysing
 	cd ../Mutator
-	mvn -q exec:java -Dexec.mainClass=analyseur.main.Main -Dexec.args="$pathOfSurefireReports $pathOfResultsDirectory $nameOfResultFile $nameOfTest"
+	mvn exec:java -Dexec.mainClass=analyseur.main.MainAnalyseur -Dexec.args="$pathOfSurefireReports $pathOfResultsDirectory $nameOfResultFile $nameOfTest"
 done
+
+mvn exec:java -Dexec.mainClass=analyseur.main.MainFinal -Dexec.args="$pathOfResultsDirectory $nameOfResultFile $pathOfXMLMutant"

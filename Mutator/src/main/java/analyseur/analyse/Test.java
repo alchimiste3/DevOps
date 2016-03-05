@@ -38,7 +38,7 @@ public class Test {
         this.fail = fail;
     }
 
-    public String isTypeFail() {
+    public String getTypeFail() {
         return typeFail;
     }
 

@@ -5,6 +5,7 @@
  */
 package analyseur.lecture_ecriture;
 
+import analyseur.analyse.Mutant;
 import analyseur.analyse.Test;
 import analyseur.analyse.TestsParClass;
 
@@ -25,52 +26,17 @@ public class GenererHTML {
 
     public GenererHTML(String repertoireHTML, String nomFichierHtml) {
         f = new File(repertoireHTML + nomFichierHtml);
-        boolean debut = false;
-        if (!f.exists())
-               debut = true;
         
         try {
             fileWriter = new FileWriter(f.getAbsolutePath(),true);
             bw = new BufferedWriter(fileWriter);
-            if (debut)
-                ecrireDebut();
+
         }
         catch(IOException e) {
             System.out.println("Le dossier pour ajouter le html n'a pas était trouvé" + e.getStackTrace());
         }
     }
 
-    public void genererListeTests(ArrayList<Test> listeTests, String nomFichier) {
-        try {
-            
-            int nbFails = 0;
-            int nbTests = 0;
-            
-            for (Test test : listeTests){
-                if (test.isFail() != false)
-                    nbFails++;
-                nbTests++;
-            }
-            
-            bw.write("<h2>Resultats du fichier : " + nomFichier + "</h2>");
-            bw.write("<p>");
-            bw.write("<h3> Nombre de mutants testes : " + nbTests + "</h3>");
-            bw.write("<h3> Nombre de mutants tues : " + nbFails + "</h3>");
-            bw.write("<ul>");
-            
-            for (Test test : listeTests) {
-                bw.write("<li>" + test.isFail() + " : " + test.isTypeFail() + "  " + test.getNomClass() + " : " + test.getNom() + "</li>");
-            }
-            
-            bw.write("</ul>");
-            bw.write("</p>");
-            
-        } 
-        catch(IOException e){
-            System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
-        }
-    }
-    
     public int pourcentageFail(ArrayList<ArrayList<Test>> listeTests){
         int compteurTestFail = 0;
         int compteurTest = 0;
@@ -91,7 +57,9 @@ public class GenererHTML {
         return (compteurTestFail*100)/compteurTest;
     }
         
-    public void genererTableauxTests(TestsParClass testClass, String nomFichier) {
+///////////////////////////////// tableau pour chaque class test //////////////////////////////////
+    
+    public void genererTableauxTestParClass(TestsParClass testClass, String nomFichier) {
         try {
             
             int nbFails = 0;
@@ -105,9 +73,7 @@ public class GenererHTML {
                 nbTests++;
             }
             
-            
-            //<td>Nombre de Test</td> <td>Temps d'execution</td> <td>Tests ignore</td>
-            
+                       
             
             bw.write("<tr>");
             bw.write("<td rowspan="+ testClass.getNombreTest() +">"+ testClass.getNomClass() +"</td>");
@@ -118,7 +84,7 @@ public class GenererHTML {
             bw.write("<td>"+listeTests.get(0).getNom()+"</td>");
             
             if(listeTests.get(0).isFail())
-                bw.write("<td class=\"fail\" >echec</td><td class=\"fail\">"+listeTests.get(0).isTypeFail()+"</td>");
+                bw.write("<td class=\"fail\" >echec</td><td class=\"fail\">"+listeTests.get(0).getTypeFail()+"</td>");
             else
                 bw.write("<td class=\"nofail\">reussie</td><td class=\"nofail\"></td>");
             
@@ -134,7 +100,7 @@ public class GenererHTML {
                 bw.write("<td>"+test.getNom()+"</td>");
                 
                 if(test.isFail())
-                    bw.write("<td class=\"fail\" >echec</td><td class=\"fail\">"+test.isTypeFail()+"</td>");
+                    bw.write("<td class=\"fail\" >echec</td><td class=\"fail\">"+test.getTypeFail()+"</td>");
                 else
                     bw.write("<td class=\"nofail\">reussie</td><td class=\"nofail\"></td>");
             
@@ -151,23 +117,23 @@ public class GenererHTML {
         
     }
     
-    public void ecrireDebutTableau(String nomSerieTest){
+    public void ecrireDebutTableauTestParClass(String nomSerieTest){
         try {
-            
             bw.write("<table border>");
             bw.write("<tr>");
             bw.write("<td>Class Test</td> <td>Nombre de tests</td> <td>Temps d'execution</td> <td>Tests ignorés</td> <td>Test</td> <td>Resultat</td> <td>Type Erreur</td>");
-            bw.write("<h2>Résultats de la série de tests \""+nomSerieTest+"\"</h2");
+            bw.write("<h2>Résultats de la série de tests \""+nomSerieTest+"\"</h2>");
             bw.write("</tr>");
         } catch (IOException e) {
             System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
         }
     }
     
-    public void ecrireFinTableau(ArrayList<ArrayList<Test>> listeTests){
+    public void ecrireFinTableauTestParClass(ArrayList<ArrayList<Test>> listeTests){
         try {
-            bw.write("</tabler>");
-            bw.write("<h4>Pourcentage d'échecs = "+ pourcentageFail(listeTests) +"%</h4");
+            bw.write("</table>");
+            bw.write("<h4>Pourcentage d'échec = "+ pourcentageFail(listeTests) +"%</h4>");
+            bw.close();
 
         } catch (IOException e) {
             System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
@@ -175,11 +141,124 @@ public class GenererHTML {
         }
     }
     
+    
+///////////////////////////////// tableau final //////////////////////////////////
+
+    public void genererTableauxListeTests(ArrayList<Mutant> listeMutant) {
+        try {
+            
+            bw.write("</div><div><h2>résumé pour chaque tests : </h2>");
+            bw.write("<table border>");
+            bw.write("<tr>");
+            bw.write("<td>Test</td> <td>Nombre d'execution réussie</td> <td>Nombre d'echec</td>");
+            bw.write("</tr>");
+            
+            // liste de tout les tests 
+            for(Mutant mut : listeMutant){
+                ArrayList<Test> listeTest = mut.getListeTest();
+                
+                for (Test test : listeTest){
+                    bw.write("<tr>");
+                    bw.write("<td>"+test.getNom()+"</td>");
+                    
+                    if(test.isFail())
+                        bw.write("<td class=\"fail\" >echec</td><td class=\"fail\">"+test.getTypeFail()+"</td>");
+                    else
+                        bw.write("<td class=\"nofail\">reussie</td><td class=\"nofail\"></td>");
+                 
+                    bw.write("</tr>");
+                }
+                
+            }
+            
+            bw.write("</table>");
+            bw.write("</div>");
+            
+
+        } 
+        catch(IOException e){
+            System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
+        }
+
+        
+    }
+    
+    public void genererTableauxMutantMort(ArrayList<Mutant> listeMutant) {
+        try {
+            
+            bw.write("</div><div><h2>Les mutant Mort</h2>");
+            bw.write("<table border>");
+            bw.write("<tr>");
+            bw.write("<td>Mutant</td> <td>Nombre de tests réussie</td> <td>Nombre de test echoue</td>");
+            bw.write("</tr>");
+            
+            // Liste des mutant tuer avec le nombre de test réussie et echoue
+            for(Mutant mut : listeMutant){   
+                if(!mut.getNombreTestFails().equals("0")){
+
+                    bw.write("<tr>");
+                    bw.write("<td>"+mut.getNom()+"</td>");
+                    int nbTestNoFail = Integer.parseInt(mut.getNombreTest()) - Integer.parseInt(mut.getNombreTestFails());
+    
+                    bw.write("<td class=\"nofail\" >"+nbTestNoFail+"</td><td class=\"fail\">"+mut.getNombreTestFails()+"</td>");
+                    bw.write("</tr>");
+                }
+                
+            }
+            
+            bw.write("</table>");
+            bw.write("</div>");
+
+        } 
+        catch(IOException e){
+            System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
+        }
+
+        
+    }
+    
+    public void genererTableauxMutantVivant(ArrayList<Mutant> listeMutant) {
+        try {
+            
+            bw.write("</div><div><h2>Les mutant Vivant</h2>");
+            bw.write("<table border>");
+            bw.write("<tr>");
+            bw.write("<td>Mutant</td> <td>Nombre de Tests ignorés</td>");
+            bw.write("</tr>");
+            
+            // Liste des mutant tuer avec le nombre de test réussie et echoue
+            for(Mutant mut : listeMutant){  
+                if(mut.getNombreTestFails().equals("0")){
+                    bw.write("<tr>");
+                    bw.write("<td>"+mut.getNom()+"</td>");
+                    bw.write("<td class=\"nofail\" >"+mut.getNombreTestSkipped()+"</td>");
+                    bw.write("</tr>");
+                }
+
+                
+            }
+            
+            bw.write("</table>");
+            bw.write("</div>");
+
+        } 
+        catch(IOException e){
+            System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
+        }
+
+        
+    }
+    
+///////////////////////////////// Generer debut et fin html //////////////////////////////////
+
     public void ecrireDebut() {
         try {
             bw.write("<html>");
             bw.write("<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><title>Resultats</title><link href=\"result.css\" rel=\"stylesheet\" media=\"all\" type=\"text/css\"></head>");
             bw.write("<body>");
+            bw.write("<div>");
+            bw.close();
+
         } catch(IOException e) {
             System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
         }
@@ -188,10 +267,13 @@ public class GenererHTML {
     
     public void ecrireFin() {
         try {
+            System.out.println("\n\n\n\n\nezrvzseer\n\n\n\n\n\n");
             bw.write("</body>");
             bw.append("</html>");
             bw.close();
         } catch(IOException e) {
+            System.out.println("9");
+
             System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
         }
         

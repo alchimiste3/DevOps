@@ -9,6 +9,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;  
 import org.jdom2.input.SAXBuilder;
 
+import analyseur.analyse.Mutant;
 import analyseur.analyse.Test;
 import analyseur.analyse.TestsParClass;
 public class LireXML {
@@ -69,4 +70,77 @@ public class LireXML {
          
          return testClass;
      }
+    
+    public ArrayList<Mutant> lireMutant(String path){  
+        ArrayList<Mutant> listeMutant = new ArrayList<Mutant>();
+
+        SAXBuilder saxBuilder = new SAXBuilder();  
+      
+        File file = new File(path);  
+     
+        try {  
+            Document document = saxBuilder.build(file);  
+        
+            Element rootNode = document.getRootElement(); 
+            
+
+            List<Element> listeMutantXML = rootNode.getChildren("mutant");
+            
+            
+            // Pour chaque mutant
+            for(Element mut : listeMutantXML){
+                
+                //On recupere le nom
+                Mutant mutant = new Mutant(mut.getChildText("nom"));
+                
+                
+                mutant.setNombreTest(mut.getChildText("nbTest"));
+                mutant.setNombreTestFails(mut.getChildText("nbTestFail"));
+                mutant.setNombreTestErrors(mut.getChildText("nbTestError"));
+                mutant.setNombreTestSkipped(mut.getChildText("nbTestSkipped"));
+                
+                // On recupere les processors
+                ArrayList<String> listeProc = new ArrayList<String>();
+                Element processors = mut.getChild("processors");
+                for(Element proc : processors.getChildren("processor")){
+                    listeProc.add(proc.getText());
+                }
+                
+                // On recupere les test
+                ArrayList<Test> listeTest = new ArrayList<Test>();
+                Element tests = mut.getChild("tests");
+                for(Element test : tests.getChildren("test")){
+                    
+                    Test t = new Test(test.getChildText("nom"), test.getChildText("nomClassTest"));
+                    
+                    if(test.getChildText("fail").equals("true")){
+                        t.setFail(true);
+                    }
+                    else{
+                        t.setFail(false);      
+                    }
+                    
+                    t.setTypeFail(test.getChildText("typeFail"));
+                    
+                    listeTest.add(t);
+
+                }
+                mutant.setListeTest(listeTest);
+                
+                System.out.println(mutant.getListeTest());
+                
+                listeMutant.add(mutant);
+            }
+            
+           
+
+        } catch (Exception e) {  
+                e.printStackTrace();  
+        }  
+        
+        
+        
+        
+        return listeMutant;
+    }
 }  
