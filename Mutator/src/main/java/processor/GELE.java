@@ -5,36 +5,45 @@ import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtMethod;
 
 
-public class GELE extends AbstractProcessor<CtElement> {
+public class GELE extends AbstractProjectProcessor {
 
-    private String nameOfClass="Classe1";
-    private int nb_of_applications=3;
 
+    public GELE() {
+        super("GELE");
+    }
+
+
+    public boolean pecularVerify(CtElement candidate) {
+        if ((candidate instanceof CtBinaryOperator)) {
+            if(((CtBinaryOperator)candidate).getKind()==BinaryOperatorKind.LE
+                    ||((CtBinaryOperator)candidate).getKind()==BinaryOperatorKind.GE) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Dans cette méthode on vérifie si la classe/méthode de l'élément analysé correspondent
+     * et si la vérification particulière correspond.On retourne le résultat sou forme de boolean
+     * @param candidate l'élément analysé
+     * @return résultat de la vérification
+     */
     @Override
     public boolean isToBeProcessed(CtElement candidate) {
-        int nb_found=0;
-        if(nb_found<nb_of_applications) {
-            if(candidate instanceof CtBinaryOperator) {
-                if(candidate.getParent(CtClass.class).getSimpleName().equals(nameOfClass)) {
-                    if(((CtBinaryOperator)candidate).getKind()==BinaryOperatorKind.LE
-                        ||((CtBinaryOperator)candidate).getKind()==BinaryOperatorKind.GE) {
-                        nb_found++;
-                        return true;
-                    }
-                }
-            }
+        if(pecularVerify(candidate)) {
+            return verifyClass(candidate.getParent(CtClass.class).getSimpleName());
+                   // && verifyMethod(candidate.getParent(CtMethod.class).getSimpleName());
         }
         return false;
     }
 
     @Override
     public void process(CtElement candidate) {
-        if (!(candidate instanceof CtBinaryOperator)) {
-            return;
-        }
-        else if(((CtBinaryOperator)candidate).getKind()==BinaryOperatorKind.LE){
+        if(((CtBinaryOperator)candidate).getKind()==BinaryOperatorKind.LE){
             CtBinaryOperator op = (CtBinaryOperator)candidate;
             op.setKind(BinaryOperatorKind.GE);
         }
