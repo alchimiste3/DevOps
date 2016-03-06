@@ -1,10 +1,17 @@
 #!/bin/bash
-pathOfProject="/home/user/DevOps/DevOps/SourcesUnderTest/"
-pathOfPom="/home/user/DevOps/DevOps/SourcesUnderTest/pom.xml"
-pathOfSurefireReports="/home/user/DevOps/DevOps/SourcesUnderTest/target/surefire-reports/"
-pathOfResultsDirectory="/home/user/DevOps/DevOps/results/"
-pathOfXMLMutant="/home/user/DevOps/DevOps/Mutator/listeMutant.xml"
-pathOfXMLConf="/home/user/DevOps/DevOps/conf.xml"
+
+#path of the directory where are Mutator and the project you want to test
+pathOfDirectory="/home/sualty/Bureau/DEVOPS/V3/DevOps/"
+#name of your project
+nameOfProject="SourcesUnderTest/"
+
+#do not modify below
+pathOfProject=$pathOfDirectory$nameOfProject
+pathOfPom=$pathOfProject"pom.xml"
+pathOfSurefireReports=$pathOfProject"target/surefire-reports/"
+pathOfResultsDirectory=$pathOfDirectory"results/"
+pathOfXMLMutant=$pathOfDirectory"Mutator/listeMutant.xml"
+pathOfXMLConf=$pathOfDirectory"conf.xml"
 
 nameOfResultFile="result.html"
 
