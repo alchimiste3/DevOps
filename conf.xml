@@ -1,23 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mutants>
-	<mutant>
-	<nom>PlusMinus+GELE</nom>
-    <processors>
-    	<processor>
-      		<nom>PlusMinus</nom>
-      		<package>
-      			<nom>package1</nom>
-      			<class>
-      				<nom>Class1</nom>
-      				<methode>getJ</methode> <!-- On applique les modifications sur cette methode-->
-      				<methode>...</methode>
-      			</class>
-      			<class>
-      				<nom>Class2</nom> <!-- ici on selection toute la class -->
-      			</class>
-      		</package>
-      	</processor>
-		<processor>GELE</processor>
-	</processors>
-  </mutant>
-</mutants>
+<!-- liste des mutants à appliquer-->
+<configuration>
+  <mutants>
+    <mutant>
+      <processor>PlusMinus</processor>
+    </mutant>
+    <mutant>      
+      <processor>GELE</processor>
+      <processor>PlusMinus</processor>
+    </mutant>
+    <mutant>
+      <processor>IncDec</processor>
+      <processor>DoubleMutator</processor>
+    </mutant>
+    <mutant>
+      <processor>IncDec</processor>
+      <processor>DoubleMutator</processor>
+      <processor>PlusMinus</processor>
+      <processor>GELE</processor>
+    </mutant>
+  </mutants>
+
+  <processors>
+    <processor>
+      <nom>PlusMinus</nom> <!-- s'applique 3 fois sur la méthode getJ de Classe1 et tout Classe2 --> 
+      <applications>3</applications>
+      <classe>
+            <nom>Classe1</nom>
+            <methode>getJ</methode>
+          </classe>
+          <classe>
+            <nom>Classe2</nom>
+          </classe>
+    </processor>
+
+    <processor>
+      <nom>IncDec</nom><!-- s'applique sur la méthode getI de la classe Classe2-->
+          <classe>
+            <nom>Classe2</nom> 
+            <methode>getI</methode>
+          </classe>
+    </processor>
+  </processors>
+<!--GELE et DoubleMutator n'ont pas de configuration définie, donc s'applique tout le temps partout où ils peuvent -->
+
+</configuration>
