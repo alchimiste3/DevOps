@@ -266,7 +266,6 @@ public class GenererHTML {
     
     public void ecrireFin() {
         try {
-            System.out.println("\n\n\n\n\nezrvzseer\n\n\n\n\n\n");
             bw.write("</body>");
             bw.append("</html>");
             bw.close();
