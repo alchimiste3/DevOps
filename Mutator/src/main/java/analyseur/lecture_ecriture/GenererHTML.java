@@ -202,8 +202,7 @@ public class GenererHTML {
     
                     bw.write("<td class=\"nofail\" >"+nbTestNoFail+"</td><td class=\"fail\">"+mut.getNombreTestFails()+"</td>");
                     bw.write("</tr>");
-                }
-                
+                }                
             }
             
             bw.write("</table>");

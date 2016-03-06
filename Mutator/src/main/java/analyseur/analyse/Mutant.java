@@ -7,9 +7,14 @@ public class Mutant {
     
     private String nom = "";
     
-    
+    //Contient les class testaient
     private ArrayList<TestsParClass> listeClassTest = new ArrayList<TestsParClass>();
+    
+    //Contient les Class modifier : les mutations
+    private ArrayList<Mutation> mutations = new ArrayList<Mutation>();
+
     private ArrayList<Test> listeTest = new ArrayList<Test>();
+    
     private String nombreTest;
     private String nombreTestFails;
     private String nombreTestErrors;
@@ -129,6 +134,14 @@ public class Mutant {
 
     public void setNombreTestSkipped(String nombreTestSkipped) {
         this.nombreTestSkipped = nombreTestSkipped;
+    }
+
+    public ArrayList<Mutation> getMutations() {
+        return mutations;
+    }
+
+    public void setMutations(ArrayList<Mutation> mutations) {
+        this.mutations = mutations;
     }
        
     

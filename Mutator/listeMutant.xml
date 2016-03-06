@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mutants>
   <mutant>
+    <nom>DoubleMutator</nom>
+    <nbTest>3</nbTest>
+    <nbTestFail>0</nbTestFail>
+    <nbTestError>0</nbTestError>
+    <nbTestSkipped>0</nbTestSkipped>
+    <processors>
+      <processor>DoubleMutator</processor>
+    </processors>
+    <tests>
+      <test>
+        <nomClassTest>package1.Classe1Test</nomClassTest>
+        <nom>testJ</nom>
+        <fail>false</fail>
+        <typeFail />
+      </test>
+      <test>
+        <nomClassTest>package1.Classe1Test</nomClassTest>
+        <nom>testK</nom>
+        <fail>false</fail>
+        <typeFail />
+      </test>
+      <test>
+        <nomClassTest>package2.Classe2Test</nomClassTest>
+        <nom>testI</nom>
+        <fail>false</fail>
+        <typeFail />
+      </test>
+    </tests>
+  </mutant>
+  <mutant>
     <nom>PlusMinus+GELE</nom>
     <nbTest>3</nbTest>
     <nbTestFail>1</nbTestFail>

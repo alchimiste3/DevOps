@@ -13,12 +13,14 @@ public class MainFinal {
         String dossierHTML = "surefire-reports/";
         String nomFichierHtml = "result.html";
         String nomFichierMutantXML = "listeMutant.xml";
-        
+        String nomFichierConfXML = "../conf.xml";
         
         if(args.length >= 3){
             dossierHTML = args[0];
             nomFichierHtml = args[1];
             nomFichierMutantXML = args[2];
+            nomFichierConfXML = args[3];
+            
         }
         
 
@@ -27,7 +29,7 @@ public class MainFinal {
         GenererHTML gen = new GenererHTML(dossierHTML, nomFichierHtml);
         
         
-        ArrayList<Mutant> liste = lire.lireMutant(nomFichierMutantXML);
+        ArrayList<Mutant> liste = lire.lireMutant(nomFichierMutantXML,nomFichierConfXML);
         gen.genererTableauxMutantMort(liste);
         gen.genererTableauxMutantVivant(liste);
         gen.genererTableauxListeTests(liste);
