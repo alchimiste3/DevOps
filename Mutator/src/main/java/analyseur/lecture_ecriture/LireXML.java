@@ -18,16 +18,12 @@ public class LireXML {
 
     
     public TestsParClass lireTests(String path){  
-        
         TestsParClass testClass = new TestsParClass();
-                
-         SAXBuilder saxBuilder = new SAXBuilder();  
-       
-         File file = new File(path);  
+        SAXBuilder saxBuilder = new SAXBuilder();  
+        File file = new File(path);  
       
          try {  
              Document document = saxBuilder.build(file);  
-         
              Element rootNode = document.getRootElement(); 
                         
              //On recupere les imformation general sur le deroulement des tests de la class test.
@@ -39,8 +35,6 @@ public class LireXML {
              testClass.setNombreTestSkipped(rootNode.getAttributeValue("skipped"));
                               
              List<Element> listeTest = rootNode.getChildren("testcase");  
-        
-             
              for(Element e : listeTest){
                  Test test = new Test(e.getAttributeValue("name"), e.getAttributeValue("classname"));
                  
@@ -61,6 +55,13 @@ public class LireXML {
          return testClass;
      }
     
+
+    /**
+     * Lit les mutants sur un fichier xml et creer une liste de Mutant qu'il retourne
+     * @param pathMutantXML
+     * @param pathConfXML
+     * @return
+     */
     public ArrayList<Mutant> lireMutant(String pathMutantXML, String pathConfXML){  
         ArrayList<Mutant> listeMutant = new ArrayList<Mutant>();
 
@@ -92,29 +93,12 @@ public class LireXML {
                 for(Element proc : processors.getChildren("processor")){
                     listeProc.add(proc.getText());
                 }
-                
+                mutant.setListeProcessor(listeProc);
                 // On recupere les test
-                ArrayList<Test> listeTest = new ArrayList<Test>();
                 Element tests = mut.getChild("tests");
-                for(Element test : tests.getChildren("test")){
-                    
-                    Test t = new Test(test.getChildText("nom"), test.getChildText("nomClassTest"));
-                    
-                    if(test.getChildText("fail").equals("true")){
-                        t.setFail(true);
-                    }
-                    else{
-                        t.setFail(false);      
-                    }
-                    
-                    t.setTypeFail(test.getChildText("typeFail"));
-                    
-                    listeTest.add(t);
 
-                }
-                mutant.setListeTest(listeTest);
-                
-                
+                creerTest(tests, mutant);
+
                 listeMutant.add(mutant);
             }
 
@@ -129,24 +113,49 @@ public class LireXML {
     }
     
     
+    private void creerTest(Element tests, Mutant mutant){
+        ArrayList<Test> listeTest = new ArrayList<Test>();
+
+        for(Element test : tests.getChildren("test")){
+            
+            Test t = new Test(test.getChildText("nom"), test.getChildText("nomClassTest"));
+            
+            if(test.getChildText("fail").equals("true")){
+                t.setFail(true);
+            }
+            else{
+                t.setFail(false);      
+            }
+            
+            t.setTypeFail(test.getChildText("typeFail"));
+            
+            listeTest.add(t);
+
+        }
+        mutant.setListeTest(listeTest);
+    }
+    
+    
+    /**
+     * Lit la configuration des mutants dans le fichier conf.xml et modifier les Mutant
+     * @param listeMutant
+     * @param saxBuilder
+     * @param fileConf
+     */
     private void lireConfXML(ArrayList<Mutant> listeMutant, SAXBuilder saxBuilder, File fileConf){
      // Quant tout les mutant sont creer, on récupere les mutation dans le fichier conf
         try {
             
             Document documentConf = saxBuilder.build(fileConf);  
             Element rootNode = documentConf.getRootElement(); 
-            List<Element> listeMutantXML = rootNode.getChildren("mutant");
-            for(Mutant m : listeMutant){
-                for(Element e : listeMutantXML){
-                    if(e.getChild("nom").equals(m.getNom())){
-                        
-                        Element processors = e.getChild("processors");
-                        List<Element> listeProc = processors.getChildren();
-                        
-                        for(Element proc : listeProc){
-                            creerMutation(proc, m);
-                        }
-                        
+            
+            Element processors = rootNode.getChild("processors");
+            List<Element> listeProc = processors.getChildren("processor");
+
+            for(Mutant m : listeMutant){               
+                for(Element proc : listeProc){
+                    if(m.haveProcessor(proc.getChildText("nom"))){
+                        creerMutation(proc, m);   
                     }
                 }
             }
@@ -156,29 +165,32 @@ public class LireXML {
         }
     }
     
+    /**
+     * Creer une mutation à ajouter à un Mutant
+     * @param proc
+     * @param mut
+     */
     private void creerMutation(Element proc,Mutant mut){
         Mutation mutation = new Mutation();
         
         mutation.setNom(proc.getChildText("nom"));
+                            
+        List<Element> listClass = proc.getChildren("classe");
         
-        List<Element> listPackage = proc.getChildren("package");
-        
-        for(Element p : listPackage){
-            String nomPackage = p.getChildText("nom");
-            mutation.addPackage(nomPackage);
+        for(Element c : listClass){
+            String nomClass = c.getChildText("nom");
+            mutation.addClass(nomClass);
             
-            List<Element> listClass = proc.getChildren("class");
-            for(Element c : listClass){
-                String nomClass = p.getChildText("nom");
-                mutation.addClass(nomClass, nomClass);
-                
-                List<Element> listMethode = proc.getChildren("methode");
-                for(Element m : listMethode){
-                    mutation.addMethode(nomPackage, nomClass, m.getText());
-                }
+            List<Element> listMethode = c.getChildren("methode");
+            for(Element m : listMethode){
+                mutation.addMethode(nomClass, m.getText());
             }
         }
         
+        
         mut.getMutations().add(mutation);
-    }
-}  
+           
+    }  
+    
+    
+}   

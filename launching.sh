@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #path of the directory where are Mutator and the project you want to test
-pathOfDirectory="/home/sualty/Bureau/DEVOPS/V3/DevOps/"
+pathOfDirectory="/home/user/DevOps/DevOps/"
 #name of your project
 nameOfProject="SourcesUnderTest/"
 

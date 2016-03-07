@@ -2,33 +2,41 @@ package analyseur.analyse;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
+/**
+ * Pemret de creer une mutation qui est applique sur un processor
+ * @author Quentin Laborde
+ *
+ */
 public class Mutation {
     
     private String nom;
+    private int nbMethode = 0;
     
-    //Liste chaque package modifie par le mutation avec les class et les methode toucher par cette mutation
-    //HashMap<package,HashMap<class, ArrayList<methode>> >
-    private HashMap<String,HashMap<String, ArrayList<String>> > listeClassMethodes = new HashMap<String, HashMap<String,ArrayList<String>>>();
+    //Liste chaques class et les methode toucher par cette mutation
+    //HashMap<class, ArrayList<methode>>
+    private HashMap<String, ArrayList<String>>  listeClassMethodes = new HashMap<String,ArrayList<String>>();
     
-    public void addPackage(String p){
-        listeClassMethodes.put(p, new HashMap<String, ArrayList<String>>());
+    
+    public void addClass(String c){
+        listeClassMethodes.put(c,new ArrayList<String>());
     }
     
-    public void addClass(String p,String c){
-        listeClassMethodes.get(p).put(c,new ArrayList<String>());
+    public void addMethode(String c, String m){
+        listeClassMethodes.get(c).add(m);
+        nbMethode++;
     }
     
-    public void addMethode(String p,String c, String m){
-        listeClassMethodes.get(p).get(c).add(m);
+    public ArrayList<String> getListeClass(){
+        ArrayList<String> liste = new ArrayList<String>();
+        liste.addAll(listeClassMethodes.keySet());
+        return liste;
     }
     
-    public HashMap<String, ArrayList<String>> getListeClass(String pack){
-        return listeClassMethodes.get(pack);
-    }
     
-    public ArrayList<String> getListeMethode(String p, String c){
-        return listeClassMethodes.get(p).get(c);
+    public ArrayList<String> getListeMethode(String c){
+        return listeClassMethodes.get(c);
     }
 
     public String getNom() {
@@ -39,14 +47,29 @@ public class Mutation {
         this.nom = nom;
     }
 
-    public HashMap<String, HashMap<String, ArrayList<String>>> getListeClassMethodes() {
+    public HashMap<String, ArrayList<String>> getListeClassMethodes() {
         return listeClassMethodes;
     }
 
     public void setListeClassMethodes(
-            HashMap<String, HashMap<String, ArrayList<String>>> listeClassMethodes) {
+            HashMap<String, ArrayList<String>> listeClassMethodes) {
         this.listeClassMethodes = listeClassMethodes;
     }
+
     
+    ////////////////////////// methode pour construire le html ///////////////////////////
+    
+
+
+    public int getNbMethode() {
+        return nbMethode;
+    }
+
+
+    public int getNbMethodeParClass(String p,String c) {
+        HashMap<String, ArrayList<String>> listeCLass = getListeClassMethodes();
+        return listeCLass.get(c).size();
+
+    }
     
 }

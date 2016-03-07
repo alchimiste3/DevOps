@@ -12,7 +12,63 @@ table {
 
 table, tr, td {
     border: 1px solid black;
-	padding : 10px;
 	text-align: center;
 }
 
+td {
+	padding: 10px;
+}
+
+.Menu{
+	margin: 0px;
+	margin-bottom: 10px;
+	width: 1000px;
+}
+
+.MutantMenu, .MutationMenu, .classMenu, .MethodeMenu{
+	width: 230px;
+}
+
+.tdAvecTab{
+	margin: 0px;
+	padding: 0px;
+}
+
+.tabMutant{
+	width: 750px;
+	margin: 0px;
+	padding: 0px;
+    border: hidden;
+
+}
+
+.tabMutation{
+	width: 500px;
+	margin: 0px;
+	border: hidden;
+
+}
+
+.tabClass{
+	width: 250px;
+	margin: 0px;
+    border: hidden;
+
+}
+
+
+.Mutant{
+	width: 230px;
+}
+
+.Mutation{
+	width: 230px;
+}
+
+.class{
+	width: 230px;
+}
+
+.methode{
+	width: 230px;
+}

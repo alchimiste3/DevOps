@@ -3,6 +3,11 @@ package analyseur.analyse;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+/**
+ * Permet de creer un mutant qui contient les mutation et test qui lui sont applique.
+ * @author Quentin Laborde
+ *
+ */
 public class Mutant {
     
     private String nom = "";
@@ -35,6 +40,13 @@ public class Mutant {
         listeClassTest.add(liste);
     }
 
+    public boolean haveProcessor(String proc){
+        for(String p : listeProcessor){
+            if(p.equals(proc)) return true;
+        }
+        
+        return false;
+    }
     
     ////////////////////////////: Getters et setters ///////////////////////////
     
@@ -144,7 +156,14 @@ public class Mutant {
         this.mutations = mutations;
     }
        
-    
+    // juste pour construire le html
+    public int getNbMethodeModifie(){
+        int res = 0;
+        for(Mutation mut : mutations){
+            res += mut.getNbMethode();
+        }
+        return 0;
+    }
     
     
     

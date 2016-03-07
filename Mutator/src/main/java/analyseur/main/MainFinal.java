@@ -7,8 +7,17 @@ import analyseur.lecture_ecriture.EcrireXML;
 import analyseur.lecture_ecriture.GenererHTML;
 import analyseur.lecture_ecriture.LireXML;
 
+/**
+ * 
+ * @author Quentin Laborde
+ *
+ */
 public class MainFinal {
     
+    /**
+     * Methode qui lance le traitement final des resultats de test 
+     * @param args
+     */
     public static void main(String[] args) {
         String dossierHTML = "surefire-reports/";
         String nomFichierHtml = "result.html";

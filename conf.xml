@@ -26,12 +26,13 @@
       <nom>PlusMinus</nom> <!-- s'applique 3 fois sur la méthode getJ de Classe1 et tout Classe2 --> 
       <applications>3</applications>
       <classe>
-            <nom>Classe1</nom>
-            <methode>getJ</methode>
-          </classe>
-          <classe>
-            <nom>Classe2</nom>
-          </classe>
+        <nom>Classe1</nom>
+        <methode>getJ</methode>
+      </classe>
+      <classe>
+        <nom>Classe2</nom>
+        <methode>getJ</methode>
+      </classe>
     </processor>
 
     <processor>

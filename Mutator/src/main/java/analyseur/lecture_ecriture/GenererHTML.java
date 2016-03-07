@@ -6,6 +6,7 @@
 package analyseur.lecture_ecriture;
 
 import analyseur.analyse.Mutant;
+import analyseur.analyse.Mutation;
 import analyseur.analyse.Test;
 import analyseur.analyse.TestsParClass;
 
@@ -14,6 +15,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
@@ -37,6 +40,11 @@ public class GenererHTML {
         }
     }
 
+    /**
+     * Calcule le pourcentage de fail pourtout les test d'un mutant
+     * @param listeTests
+     * @return
+     */
     public int pourcentageFail(ArrayList<ArrayList<Test>> listeTests){
         int compteurTestFail = 0;
         int compteurTest = 0;
@@ -59,6 +67,11 @@ public class GenererHTML {
         
 ///////////////////////////////// tableau pour chaque class test //////////////////////////////////
     
+    /**
+     * Generer un partie du tableau des test par class de test : chaque invocation de cette methode traite une class test
+     * @param testClass
+     * @param nomFichier
+     */
     public void genererTableauxTestParClass(TestsParClass testClass, String nomFichier) {
         try {
             
@@ -117,6 +130,11 @@ public class GenererHTML {
         
     }
     
+    /**
+     * On ecrire le debut du tableaux des test pas class de test
+     * On doit separer cette partie pour pouvoir remplire le tableau avec plusieur appelle de methode.
+     * @param nomSerieTest
+     */
     public void ecrireDebutTableauTestParClass(String nomSerieTest){
         try {
             bw.write("<table border>");
@@ -129,6 +147,11 @@ public class GenererHTML {
         }
     }
     
+    /**
+     * On ecrire la fin du tableaux des test pas class de test
+     * On doit separer cette partie pour pouvoir remplire le tableau avec plusieur appelle de methode.
+     * @param nomSerieTest
+     */
     public void ecrireFinTableauTestParClass(ArrayList<ArrayList<Test>> listeTests){
         try {
             bw.write("</table>");
@@ -144,6 +167,10 @@ public class GenererHTML {
     
 ///////////////////////////////// tableau final //////////////////////////////////
 
+    /**
+     * Genrer le tableaux qui resume tout les tests du script avec le nom, le nombre d'execution reussie et le nombre d'echec
+     * @param listeMutant
+     */
     public void genererTableauxListeTests(ArrayList<Mutant> listeMutant) {
         try {
             
@@ -168,7 +195,6 @@ public class GenererHTML {
                  
                     bw.write("</tr>");
                 }
-                
             }
             
             bw.write("</table>");
@@ -183,6 +209,10 @@ public class GenererHTML {
         
     }
     
+    /**
+     * Permet de creer le tableau de mutant mort lors des tests
+     * @param listeMutant
+     */
     public void genererTableauxMutantMort(ArrayList<Mutant> listeMutant) {
         try {
             
@@ -216,25 +246,85 @@ public class GenererHTML {
         
     }
     
+    /**
+     * Permet de creer un tableau qui regroupe les mutant en vie et leur mutation (avec position de chaque mutations)
+     * @param listeMutant
+     */
     public void genererTableauxMutantVivant(ArrayList<Mutant> listeMutant) {
         try {
             
-            bw.write("</div><div><h2>Les mutant Vivant</h2>");
-            bw.write("<table border>");
-            bw.write("<tr>");
-            bw.write("<td>Mutant</td> <td>Nombre de Tests ignorés</td>");
-            bw.write("</tr>");
             
-            // Liste des mutant tuer avec le nombre de test réussie et echoue
-            for(Mutant mut : listeMutant){  
-                if(mut.getNombreTestFails().equals("0")){
-                    bw.write("<tr>");
-                    bw.write("<td>"+mut.getNom()+"</td>");
-                    bw.write("<td class=\"nofail\" >"+mut.getNombreTestSkipped()+"</td>");
-                    bw.write("</tr>");
-                }
+            bw.write("</div><div><h2>Les mutant Vivant</h2>");
+            
+            bw.write("<table class=\"Menu\" border>");
+            bw.write("<tr>");
+            bw.write("<td class=\"MutantMenu\">Mutant</td><td class=\"MutationMenu\">Mutation</td><td class=\"classMenu\">Class modifie</td><td class=\"MethodeMenu\">Methode modifie</td>");
+            bw.write("</tr>");
+            bw.write("</table>");
 
+            bw.write("<table border>");
+      
+            if(listeMutant.size() != 0){
+                for(Mutant mut : listeMutant){  
+                    if(mut.getNombreTestFails().equals("0")){
+                        
+                        bw.write("<tr>");
+                        bw.write("<td class=\"MutantMenu\">"+mut.getNom()+"</td>");
+                        bw.write("<td class=\"tdAvecTab\">");
+                        bw.write("<table class=\"tabMutant\"  border>");
+
+                        ArrayList<Mutation> listeMutation = mut.getMutations();
+    
+                        if(listeMutation.size() != 0){
+                            for(int i = 0 ; i < listeMutation.size(); i++){
+                                ArrayList<String> listClass = listeMutation.get(i).getListeClass();
+                                
+                                bw.write("<tr>");
+                                bw.write("<td class=\"Mutation\">"+listeMutation.get(i).getNom()+"</td>");
+                                bw.write("<td class=\"tdAvecTab\">");
+                                bw.write("<table class=\"tabMutation\" border>");
+        
+                                if(listClass.size() != 0){
+                                    for(int y = 0 ; y < listClass.size(); y++){
+                                        ArrayList<String> listMethode = listeMutation.get(i).getListeMethode(listClass.get(y));
+                                        
+                                        bw.write("<tr>");
+
+                                       // System.out.println("listeMutation.get(i) = "+ listeMutation.get(i));
+                                        bw.write("<td class=\"class\">"+listClass.get(y)+"</td>");
+                                        bw.write("<td class=\"tdAvecTab\">");
+                                        bw.write("<table class=\"tabClass\" border>");
+                                        
+                                        if(listMethode.size() != 0){
+                                            for(int z = 0 ; z < listMethode.size(); z++){            
+                                                bw.write("<tr class=\"Methode\">"+listMethode.get(z)+"</tr>");
+
+                                            }
+                                        }
+                                        bw.write("</table>");
+                                        bw.write("</td>");
+                                        bw.write("</tr>");
+
+                                    }
+                                }
+                                bw.write("</table>");
+                                bw.write("</td>");
+                                bw.write("</tr>");
+        
+                            }
+                        }
+                        
+                        bw.write("</table>");
+                        bw.write("</td>");
+                        bw.write("</tr>");
+    
+    
+                        
                 
+                    }
+    
+                    
+                }
             }
             
             bw.write("</table>");
