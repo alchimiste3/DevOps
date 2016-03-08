@@ -36,10 +36,9 @@
     </processor>
 
     <processor>
-      <nom>IncDec</nom><!-- s'applique sur la méthode getI de la classe Classe2-->
+      <nom>PlusMinus</nom><!-- s'applique sur la classe Classe1-->
           <classe>
-            <nom>Classe2</nom> 
-            <methode>getI</methode>
+            <nom>Classe1</nom> 
           </classe>
     </processor>
   </processors>
