@@ -8,6 +8,7 @@ import spoon.reflect.code.UnaryOperatorKind;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.declaration.CtPackage;
 
 
 public class IncDec extends AbstractProjectProcessor {
@@ -35,12 +36,20 @@ public class IncDec extends AbstractProjectProcessor {
      */
     @Override
     public boolean isToBeProcessed(CtElement candidate) {
+        CtPackage p = candidate.getParent(CtPackage.class);
+        CtClass c = candidate.getParent(CtClass.class);
+        CtMethod m = candidate.getParent(CtMethod.class);
         try {
-            if(pecularVerify(candidate))
-                if(verifyClass(candidate.getParent(CtClass.class).getSimpleName()))
-                    if(verifyMethod(candidate.getParent(CtMethod.class).getSignature())){
-                        return verifyNbApplication();
+            if(pecularVerify(candidate)){
+                if(verifyPackage(p.getSimpleName())){
+                    if(verifyClass(c.getSimpleName())){
+                        if(verifyMethod(m.getSignature())){
+                            return verifyNbApplication();
+                        }
                     }
+                }
+            }
+
         }
         catch(NullPointerException e) {
             return false;

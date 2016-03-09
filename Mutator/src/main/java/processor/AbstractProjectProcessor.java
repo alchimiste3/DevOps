@@ -14,16 +14,18 @@ import java.util.List;
  */
 abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcessor<CtElement> {
     protected String nom;
+    protected List<String> packages;
     protected List<String> classes;
     protected List<String> methodes;
     protected int nb_applications;
 
     public AbstractProjectProcessor(String nom) {
         super();
+        this.packages = new ArrayList<String>();
         this.classes = new ArrayList<String>();
         this.methodes = new ArrayList<String>();
         this.nom = nom;
-        setClassesAndMethods();
+        setPackagesAndClassesAndMethods();
         setNbApplication();
     }
 
@@ -33,17 +35,31 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
      */
     abstract boolean pecularVerify(CtElement candidate);
 
+    public boolean verifyPackage(String pack) {
+        if(packages.size()==0)
+            return true;
+        else if(pack==null) {
+            throw new NullPointerException();
+        }
+        for(String p:packages) {
+            if (p.equals(pack)) {
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      *vérifie si une classe est dans la liste des classes
      * @param classe la classe à vérifier
      * @return true or false
      */
+
     public boolean verifyClass(String classe) {
-        if(classe==null) {
+        if(classes.size()==0)
+            return true;
+        else if(classe==null) {
             throw new NullPointerException();
         }
-        else if(classes.size()==0)
-            return true;
         for(String c:classes) {
             if (c.equals(classe)) {
                 return true;
@@ -51,18 +67,17 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
         }
         return false;
     }
-
     /**
      *vérifie si une méthode est dans la liste des méthodes
      * @param method la méthode à vérifier
      * @return true or false
      */
     public boolean verifyMethod(String method) {
-        if(method==null) {
-            throw new NullPointerException();
-        }
-        else if(methodes.size()==0){
+        if(methodes.size()==0){
             return true;
+        }
+        else if(method==null) {
+            throw new NullPointerException();
         }
         for(String m: methodes) {
             if (m.equals(method)){
@@ -84,7 +99,7 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
      * récupère la liste des classes où appliquer le processeur.Si cette liste est vide, on l'applique dans toutes les classes
      * @return la liste des classes où appliquer le processeur
      */
-    public void setClassesAndMethods() {
+    public void setPackagesAndClassesAndMethods() {
         String path = new java.io.File("").getAbsolutePath();
         path=path.substring(0,path.lastIndexOf('/'));
         path=path+"/conf.xml";
@@ -104,12 +119,16 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
                 if(c.getChildText("nom").equals(this.nom))
                     config = c;
             }
-            List<Element> classes = config.getChildren("classe");
-            for(Element e : classes) {
-                this.classes.add(e.getChildText("nom"));
-                List<Element> methodes = e.getChildren("methode");
-                for(Element m : methodes) {
-                    this.methodes.add(m.getText());
+            List<Element> packages = config.getChildren("package");
+            for(Element p : packages) {
+                this.packages.add(p.getChildText("nom"));
+                List<Element> classes = p.getChildren("classe");
+                for(Element e : classes) {
+                    this.classes.add(e.getChildText("nom"));
+                    List<Element> methodes = e.getChildren("methode");
+                    for(Element m : methodes) {
+                        this.methodes.add(m.getText());
+                    }
                 }
             }
 

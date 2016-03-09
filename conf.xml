@@ -5,33 +5,19 @@
     <mutant>
       <processor>PlusMinus</processor>
     </mutant>
-    <mutant>
-      <processor>GELE</processor>
-      <processor>IncDec</processor>
-    </mutant>
   </mutants>
 
   <processors>
     <processor>
-      <nom>PlusMinus</nom> <!-- s'applique 3 fois sur la méthode getJ de Classe1 et tout Classe2 --> 
-      <applications>3</applications>
-      <classe>
-        <nom>Classe1</nom>
-        <methode>getJ</methode>
-      </classe>
-      <classe>
-        <nom>Classe2</nom>
-        <methode>getJ</methode>
-      </classe>
-    </processor>
-
-    <processor>
       <nom>PlusMinus</nom><!-- s'applique sur la classe Classe1-->
-          <classe>
-            <nom>Classe1</nom> 
-            <methode>void incJ(int)</methode>
-            <methode>void incN()</methode>
-          </classe>
+          <package>
+            <nom>package1</nom>
+            <classe>
+              <nom>Classe1</nom> 
+              <methode>void incJ(int)</methode>
+              <methode>void incN()</methode>
+            </classe>
+          </package>
           <applications>4</applications>
     </processor>
   </processors>
