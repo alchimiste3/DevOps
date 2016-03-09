@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #path of the directory where are Mutator and the project you want to test
-pathOfDirectory="/home/user/DevOps/DevOps/"
+pathOfDirectory="/home/sualty/Bureau/DEVOPS/V3/DevOps/"
 #name of your project
 nameOfProject="SourcesUnderTest/"
 
@@ -44,3 +44,9 @@ do
 done
 
 mvn exec:java -Dexec.mainClass=analyseur.main.MainFinal -Dexec.args="$pathOfResultsDirectory $nameOfResultFile $pathOfXMLMutant $pathOfXMLConf"
+
+mvn clean
+cd ../SourcesUnderTest
+mvn clean
+cd ..
+rm processors.txt

@@ -5,20 +5,6 @@
     <mutant>
       <processor>PlusMinus</processor>
     </mutant>
-    <mutant>      
-      <processor>GELE</processor>
-      <processor>PlusMinus</processor>
-    </mutant>
-    <mutant>
-      <processor>IncDec</processor>
-      <processor>DoubleMutator</processor>
-    </mutant>
-    <mutant>
-      <processor>IncDec</processor>
-      <processor>DoubleMutator</processor>
-      <processor>PlusMinus</processor>
-      <processor>GELE</processor>
-    </mutant>
   </mutants>
 
   <processors>
