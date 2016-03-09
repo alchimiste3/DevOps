@@ -99,6 +99,7 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
             Element processors = rootNode.getChild("processors");
 
             List<Element> configs = processors.getChildren("processor");
+
             for(Element c : configs) {
                 if(c.getChildText("nom").equals(this.nom))
                     config = c;

@@ -19,10 +19,13 @@ public class MainFinal {
      * @param args
      */
     public static void main(String[] args) {
+        
+        //Chemin vers les dossier et fichier a modifier et lire
         String dossierHTML = "surefire-reports/";
         String nomFichierHtml = "result.html";
         String nomFichierMutantXML = "listeMutant.xml";
         String nomFichierConfXML = "../conf.xml";
+        
         
         if(args.length >= 3){
             dossierHTML = args[0];
@@ -41,7 +44,6 @@ public class MainFinal {
         ArrayList<Mutant> liste = lire.lireMutant(nomFichierMutantXML,nomFichierConfXML);
         gen.genererTableauxMutantMort(liste);
         gen.genererTableauxMutantVivant(liste);
-        gen.genererTableauxListeTests(liste);
         gen.ecrireFin();
 
 

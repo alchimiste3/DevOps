@@ -2,6 +2,11 @@ package analyseur.analyse;
 
 import java.util.ArrayList;
 
+/**
+ * Permet de creer un TestsParClass qui contient touts les objet Test d'une class test.
+ * @author Quentin Laborde
+ *
+ */
 public class TestsParClass {
     ArrayList<Test> listeTests = new ArrayList<Test>();
     
