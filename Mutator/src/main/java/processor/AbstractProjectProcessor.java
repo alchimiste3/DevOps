@@ -1,12 +1,9 @@
 package processor;
 
-import analyseur.analyse.Mutant;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
-import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtMethod;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,9 +20,10 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
 
     public AbstractProjectProcessor(String nom) {
         super();
+        this.classes = new ArrayList<String>();
+        this.methodes = new ArrayList<String>();
         this.nom = nom;
-        setClasses();
-        setMethodes();
+        setClassesAndMethods();
         setNbApplication();
     }
 
@@ -41,7 +39,10 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
      * @return true or false
      */
     public boolean verifyClass(String classe) {
-        if(classes.size()==0)
+        if(classe==null) {
+            throw new NullPointerException();
+        }
+        else if(classes.size()==0)
             return true;
         for(String c:classes) {
             if (c.equals(classe)) {
@@ -57,12 +58,16 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
      * @return true or false
      */
     public boolean verifyMethod(String method) {
-        if(methodes.size()==0)
+        if(method==null) {
+            throw new NullPointerException();
+        }
+        else if(methodes.size()==0){
             return true;
-
+        }
         for(String m: methodes) {
-            if (m.equals(method))
+            if (m.equals(method)){
                 return true;
+            }
         }
         return false;
     }
@@ -79,8 +84,7 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
      * récupère la liste des classes où appliquer le processeur.Si cette liste est vide, on l'applique dans toutes les classes
      * @return la liste des classes où appliquer le processeur
      */
-    public void setClasses() {
-        this.classes=new ArrayList<String>();
+    public void setClassesAndMethods() {
         String path = new java.io.File("").getAbsolutePath();
         path=path.substring(0,path.lastIndexOf('/'));
         path=path+"/conf.xml";
@@ -102,6 +106,10 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
             List<Element> classes = config.getChildren("classe");
             for(Element e : classes) {
                 this.classes.add(e.getChildText("nom"));
+                List<Element> methodes = e.getChildren("methode");
+                for(Element m : methodes) {
+                    this.methodes.add(m.getText());
+                }
             }
 
         }
@@ -113,15 +121,7 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
         }
     }
 
-    /**
-     * récupère la liste des méthodes où appliquer le processeur.Si cette liste est vide, on l'applique dans toutes les méthodes
-     * @return la liste des méthodes où appliquer le processeur
-     */
-    public void setMethodes() {
-        List<String> list = new ArrayList<String>();
-        //TODO:récupérer info du xml si existante . On utilise la variable "nom" pour savoir où chercher
-        this.methodes =list;
-    }
+
 
     /**
      * récupère le nombre de fois à appliquer le processeur.Si -1, on l'applique tout le temps

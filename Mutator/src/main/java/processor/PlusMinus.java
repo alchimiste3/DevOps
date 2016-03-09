@@ -34,12 +34,15 @@ public class PlusMinus extends AbstractProjectProcessor {
      */
     @Override
     public boolean isToBeProcessed(CtElement candidate) {
-        if(pecularVerify(candidate)) {
-            if(verifyClass(candidate.getParent(CtClass.class).getSimpleName())){
-                CtConstructor m = candidate.getParent(CtConstructor.class);
-                System.out.println("bloublou " + m.getSignature());
-                return verifyNbApplication();
-            }
+        try {
+        if(pecularVerify(candidate))
+            if(verifyClass(candidate.getParent(CtClass.class).getSimpleName()))
+                if(verifyMethod(candidate.getParent(CtMethod.class).getSignature())){
+                    return verifyNbApplication();
+                }
+        }
+        catch(NullPointerException e) {
+            return false;
         }
         return false;
     }

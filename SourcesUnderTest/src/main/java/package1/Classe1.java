@@ -10,20 +10,33 @@ public class Classe1 {
     private double doubleVar;
     public Classe1() {
         j=0;k=0;l=0;m=0;n=0;
-        j=j+1;
-        k=k+1;
-        l=l+1;
+        incJ(2);incK();incL();incN();
         m=m+1;
-        n=n+1;
-        if(k<=j)
-            k++;
-
         double a = 5;
         double b = 2;
         double c = a / b;
         doubleVar = c;
     }
 
+    public void incJ(int g) {
+        this.j=j+1;
+    }
+
+    public void incK() {
+        this.k=k+1;
+    }
+
+    public void incL() {
+        this.l=l+1;
+    }
+
+    public void incM() {
+        this.m=m+1;
+    }
+
+    public void incN() {
+        this.n=n+1;
+    }
 
     public int getJ() {
         return j;

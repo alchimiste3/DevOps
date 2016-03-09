@@ -39,6 +39,8 @@
       <nom>PlusMinus</nom><!-- s'applique sur la classe Classe1-->
           <classe>
             <nom>Classe1</nom> 
+            <methode>void incJ(int)</methode>
+            <methode>void incN()</methode>
           </classe>
           <applications>4</applications>
     </processor>
