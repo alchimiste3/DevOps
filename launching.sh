@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #path of the directory where are Mutator and the project you want to test
-pathOfDirectory="/home/sualty/Bureau/DEVOPS/V3/DevOps/"
+pathOfDirectory="/home/user/DevOps/DevOps/"
 #name of your project
 nameOfProject="SourcesUnderTest/"
 
@@ -12,7 +12,7 @@ pathOfSurefireReports=$pathOfProject"target/surefire-reports/"
 pathOfResultsDirectory=$pathOfDirectory"results/"
 pathOfXMLMutant=$pathOfDirectory"Mutator/listeMutant.xml"
 pathOfXMLConf=$pathOfDirectory"conf.xml"
-
+pathOfProcTxt=$pathOfDirectory"processors.txt"
 nameOfResultFile="result.html"
 
 #removing last test
@@ -21,7 +21,7 @@ rm -f ./results/result.html
 cd ./Mutator
 mvn clean install
 
-mvn exec:java -Dexec.mainClass=analyseur.main.MainInitiale -Dexec.args="$pathOfResultsDirectory $nameOfResultFile $pathOfXMLMutant"
+mvn exec:java -Dexec.mainClass=analyseur.main.MainInitiale -Dexec.args="$pathOfResultsDirectory $nameOfResultFile $pathOfXMLMutant $pathOfXMLConf $pathOfProcTxt"
 
 #launching tests with one processor
 for (( i=1; i<=$(wc -l < ../processors.txt) ; i++ ))

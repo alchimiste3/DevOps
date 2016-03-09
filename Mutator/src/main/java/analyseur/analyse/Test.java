@@ -1,5 +1,10 @@
 package analyseur.analyse;
 
+/**
+ * Permet de creer un Test qui contient le resultat d'un test unitaire d'une des class test du code source 
+ * @author Quentin Laborde
+ *
+ */
 public class Test {
     
     private String nom;
