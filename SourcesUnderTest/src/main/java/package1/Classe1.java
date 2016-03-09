@@ -7,6 +7,7 @@ public class Classe1 {
     private int l;
     private int m;
     private int n;
+    private double doubleVar;
     public Classe1() {
         j=0;k=0;l=0;m=0;n=0;
         j=j+1;
@@ -14,6 +15,13 @@ public class Classe1 {
         l=l+1;
         m=m+1;
         n=n+1;
+        if(k<=j)
+            k++;
+
+        double a = 5;
+        double b = 2;
+        double c = a / b;
+        doubleVar = c;
     }
 
 
@@ -31,5 +39,8 @@ public class Classe1 {
     }
     public int getN() {
         return n;
+    }
+    public double getDoubleVar() {
+        return doubleVar;
     }
 }
