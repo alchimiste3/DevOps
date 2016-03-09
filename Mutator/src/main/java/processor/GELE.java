@@ -34,10 +34,15 @@ public class GELE extends AbstractProjectProcessor {
      */
     @Override
     public boolean isToBeProcessed(CtElement candidate) {
-        if(pecularVerify(candidate)) {
-            if(verifyClass(candidate.getParent(CtClass.class).getSimpleName())){
-                return verifyNbApplication();
-            }
+        try {
+            if(pecularVerify(candidate))
+                if(verifyClass(candidate.getParent(CtClass.class).getSimpleName()))
+                    if(verifyMethod(candidate.getParent(CtMethod.class).getSignature())){
+                        return verifyNbApplication();
+                    }
+        }
+        catch(NullPointerException e) {
+            return false;
         }
         return false;
     }

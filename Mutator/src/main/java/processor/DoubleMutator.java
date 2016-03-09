@@ -5,6 +5,7 @@ import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.ClassFactory;
 import spoon.reflect.reference.CtTypeReference;
@@ -30,10 +31,15 @@ public class DoubleMutator extends AbstractProjectProcessor {
      */
     @Override
     public boolean isToBeProcessed(CtElement candidate) {
-        if(pecularVerify(candidate)) {
-            if(verifyClass(candidate.getParent(CtClass.class).getSimpleName())){
-                return verifyNbApplication();
-            }
+        try {
+            if(pecularVerify(candidate))
+                if(verifyClass(candidate.getParent(CtClass.class).getSimpleName()))
+                    if(verifyMethod(candidate.getParent(CtMethod.class).getSignature())){
+                        return verifyNbApplication();
+                    }
+        }
+        catch(NullPointerException e) {
+            return false;
         }
         return false;
     }
