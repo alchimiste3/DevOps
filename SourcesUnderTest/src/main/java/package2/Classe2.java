@@ -6,7 +6,11 @@ package package2;
 public class Classe2 {
     private int i;
     public Classe2() {
-        i++;
+        i=0;
+        incI();
+    }
+    public void incI() {
+        i=i+1;
     }
     public int getI() {
         return i;

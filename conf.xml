@@ -4,6 +4,7 @@
   <mutants>
     <mutant>
       <processor>PlusMinus</processor>
+      <processor>GELE</processor>
     </mutant>
   </mutants>
 
@@ -11,12 +12,8 @@
     <processor>
       <nom>PlusMinus</nom><!-- s'applique sur la classe Classe1-->
           <package>
-            <nom>package1</nom>
-            <classe>
-              <nom>Classe1</nom> 
-              <methode>void incJ(int)</methode>
-              <methode>void incN()</methode>
-            </classe>
+            <nom>package2</nom>
+
           </package>
           <applications>4</applications>
     </processor>

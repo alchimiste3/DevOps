@@ -239,9 +239,12 @@ public class LireXML {
                 List<Element> listeproc = mutant.getChildren("processor");
                 
                 String res = "";
-                for(Element proc : listeproc){
-
-                    res = res + " " + proc.getText();
+                for(int i =0;i<listeproc.size();i++){
+                    Element proc = listeproc.get(i);
+                    if(i==0)
+                        res = res+proc.getText();
+                    else
+                        res = res + " " + proc.getText();
                 }
                 fichier.write(res + "\n");
 
