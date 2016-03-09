@@ -3,9 +3,7 @@ package processor;
 import javax.management.openmbean.SimpleType;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtType;
+import spoon.reflect.declaration.*;
 import spoon.reflect.factory.ClassFactory;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.support.reflect.code.CtLocalVariableImpl;
@@ -30,9 +28,23 @@ public class DoubleMutator extends AbstractProjectProcessor {
      */
     @Override
     public boolean isToBeProcessed(CtElement candidate) {
-        if(pecularVerify(candidate)) {
-            return verifyClass(candidate.getParent(CtClass.class).getSimpleName());
-            //  && verifyMethod(candidate.getParent(CtMethod.class).getSimpleName());
+        CtPackage p = candidate.getParent(CtPackage.class);
+        CtClass c = candidate.getParent(CtClass.class);
+        CtMethod m = candidate.getParent(CtMethod.class);
+        try {
+            if(pecularVerify(candidate)){
+                if(verifyPackage(p.getSimpleName())){
+                    if(verifyClass(c.getSimpleName())){
+                        if(verifyMethod(m.getSignature())){
+                            return verifyNbApplication();
+                        }
+                    }
+                }
+            }
+
+        }
+        catch(NullPointerException e) {
+            return false;
         }
         return false;
     }

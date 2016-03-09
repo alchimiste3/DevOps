@@ -12,12 +12,13 @@ public class Mutant {
     
     private String nom = "";
     
-    //Contient les class testaient
+    //Liste des test par class de test
     private ArrayList<TestsParClass> listeClassTest = new ArrayList<TestsParClass>();
     
-    //Contient les Class modifier : les mutations
+    //Liste des mutations du mutant qui sont applique sur certain partie du code (voir conf.xml)
     private ArrayList<Mutation> mutations = new ArrayList<Mutation>();
 
+    //Liste des Test effectuer sur tout le mutant
     private ArrayList<Test> listeTest = new ArrayList<Test>();
     
     private String nombreTest;
@@ -27,6 +28,7 @@ public class Mutant {
     
     private ArrayList<String> listeProcessor = new ArrayList<String>();
 
+   
     public Mutant(String nom){
         this.nom = nom;
         
@@ -156,14 +158,6 @@ public class Mutant {
         this.mutations = mutations;
     }
        
-    // juste pour construire le html
-    public int getNbMethodeModifie(){
-        int res = 0;
-        for(Mutation mut : mutations){
-            res += mut.getNbMethode();
-        }
-        return 0;
-    }
     
     
     

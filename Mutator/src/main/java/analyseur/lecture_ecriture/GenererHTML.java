@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- *
+ * Permet de generer de remplire un fichier html
  * @author user
  */
 public class GenererHTML {
@@ -74,20 +74,8 @@ public class GenererHTML {
      */
     public void genererTableauxTestParClass(TestsParClass testClass, String nomFichier) {
         try {
-            
-            int nbFails = 0;
-            int nbTests = 0;
-            
             ArrayList<Test> listeTests = testClass.getListeTests();
-            
-            for (Test test : listeTests){
-                if (test.isFail() == false)
-                    nbFails++;
-                nbTests++;
-            }
-            
-                       
-            
+
             bw.write("<tr>");
             bw.write("<td rowspan="+ testClass.getNombreTest() +">"+ testClass.getNomClass() +"</td>");
             bw.write("<td rowspan="+ testClass.getNombreTest() +">"+ testClass.getNombreTest()+"</td>");
@@ -100,12 +88,9 @@ public class GenererHTML {
                 bw.write("<td class=\"fail\" >echec</td><td class=\"fail\">"+listeTests.get(0).getTypeFail()+"</td>");
             else
                 bw.write("<td class=\"nofail\">reussie</td><td class=\"nofail\"></td>");
-            
-            
             bw.write("</tr>");
             
             
-            //On parcourt les autres test
             for (int i = 1; i< listeTests.size() ; i++){
                 
                 Test test = listeTests.get(i);
@@ -117,11 +102,8 @@ public class GenererHTML {
                 else
                     bw.write("<td class=\"nofail\">reussie</td><td class=\"nofail\"></td>");
             
-                
                 bw.write("</tr>");
             }
-            
-
         } 
         catch(IOException e){
             System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
@@ -167,47 +149,6 @@ public class GenererHTML {
     
 ///////////////////////////////// tableau final //////////////////////////////////
 
-    /**
-     * Genrer le tableaux qui resume tout les tests du script avec le nom, le nombre d'execution reussie et le nombre d'echec
-     * @param listeMutant
-     */
-    public void genererTableauxListeTests(ArrayList<Mutant> listeMutant) {
-        try {
-            
-            bw.write("</div><div><h2>résumé pour chaque tests : </h2>");
-            bw.write("<table border>");
-            bw.write("<tr>");
-            bw.write("<td>Test</td> <td>Nombre d'execution réussie</td> <td>Nombre d'echec</td>");
-            bw.write("</tr>");
-            
-            // liste de tout les tests 
-            for(Mutant mut : listeMutant){
-                ArrayList<Test> listeTest = mut.getListeTest();
-                
-                for (Test test : listeTest){
-                    bw.write("<tr>");
-                    bw.write("<td>"+test.getNom()+"</td>");
-                    
-                    if(test.isFail())
-                        bw.write("<td class=\"fail\" >echec</td><td class=\"fail\">"+test.getTypeFail()+"</td>");
-                    else
-                        bw.write("<td class=\"nofail\">reussie</td><td class=\"nofail\"></td>");
-                 
-                    bw.write("</tr>");
-                }
-            }
-            
-            bw.write("</table>");
-            bw.write("</div>");
-            
-
-        } 
-        catch(IOException e){
-            System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
-        }
-
-        
-    }
     
     /**
      * Permet de creer le tableau de mutant mort lors des tests
@@ -222,14 +163,12 @@ public class GenererHTML {
             bw.write("<td>Mutant</td> <td>Nombre de tests réussie</td> <td>Nombre de test echoue</td>");
             bw.write("</tr>");
             
-            // Liste des mutant tuer avec le nombre de test réussie et echoue
             for(Mutant mut : listeMutant){   
                 if(!mut.getNombreTestFails().equals("0")){
 
                     bw.write("<tr>");
                     bw.write("<td>"+mut.getNom()+"</td>");
                     int nbTestNoFail = Integer.parseInt(mut.getNombreTest()) - Integer.parseInt(mut.getNombreTestFails());
-    
                     bw.write("<td class=\"nofail\" >"+nbTestNoFail+"</td><td class=\"fail\">"+mut.getNombreTestFails()+"</td>");
                     bw.write("</tr>");
                 }                
@@ -290,7 +229,6 @@ public class GenererHTML {
                                         
                                         bw.write("<tr>");
 
-                                       // System.out.println("listeMutation.get(i) = "+ listeMutation.get(i));
                                         bw.write("<td class=\"class\">"+listClass.get(y)+"</td>");
                                         bw.write("<td class=\"tdAvecTab\">");
                                         bw.write("<table class=\"tabClass\" border>");
@@ -318,9 +256,6 @@ public class GenererHTML {
                         bw.write("</td>");
                         bw.write("</tr>");
     
-    
-                        
-                
                     }
     
                     
@@ -340,6 +275,9 @@ public class GenererHTML {
     
 ///////////////////////////////// Generer debut et fin html //////////////////////////////////
 
+    /**
+     * On ecrit le debut du fichier html avec un lien vers du css
+     */
     public void ecrireDebut() {
         try {
             bw.write("<html>");
@@ -354,14 +292,15 @@ public class GenererHTML {
         
     }
     
+    /**
+     * On ecrit la fin du fichier html
+     */
     public void ecrireFin() {
         try {
             bw.write("</body>");
             bw.append("</html>");
             bw.close();
         } catch(IOException e) {
-            System.out.println("9");
-
             System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
         }
         

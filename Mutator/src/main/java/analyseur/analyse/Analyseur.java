@@ -8,7 +8,11 @@ import analyseur.lecture_ecriture.GenererHTML;
 
 import analyseur.lecture_ecriture.LireXML;
 
-
+/**
+ * Permet de creer un Analyseur pour parcourire les resultats des tests Junit d'un projet et ecrire l'analyse dans un html
+ * @author user
+ *
+ */
 public class Analyseur {
     
     private String repetoireTest;
@@ -28,13 +32,17 @@ public class Analyseur {
         listeFichierTest = new ArrayList<String>();
     }
     
-
+    /**
+     * Analyse chaque fichier xml creer lors de test Junit et remplie un tableau resumant chaque fichier
+     */
     public void AnalyserFichiersTests(){
         
+        //On creer un mutant
         Mutant mutant = new Mutant(nomSerieTest);
         
-        ArrayList<ArrayList<Test>> list = new ArrayList();
+        ArrayList<ArrayList<Test>> list = new ArrayList<ArrayList<Test>>();
         
+        //On liste les les nom des fichiers xml resultat
         ListerFichierTest();
         
         GenererHTML genHTML = new GenererHTML(repertoireHTML,nomFichierHtml);
@@ -46,13 +54,18 @@ public class Analyseur {
             LireXML parser = new LireXML();
             
             TestsParClass testClass = parser.lireTests(repetoireTest+t);
+            
             list.add(testClass.getListeTests());
+            
             mutant.addTestParClass(testClass);
+            
             genHTML.genererTableauxTestParClass(testClass, t);
 
         }
         
         EcrireXML ecrire = new EcrireXML();
+        
+        //On ajoute le mutant au fichier xml listeMutant
         ecrire.ecrireMutant(mutant, nomFichierMutantXML);
         genHTML.ecrireFinTableauTestParClass(list);
     }

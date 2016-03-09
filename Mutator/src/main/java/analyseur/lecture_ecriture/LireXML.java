@@ -1,7 +1,8 @@
 package analyseur.lecture_ecriture;
 
 import java.io.File;
-
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +15,18 @@ import analyseur.analyse.Mutation;
 import analyseur.analyse.Test;
 import analyseur.analyse.TestsParClass;
 
+/**
+ * Permet de lire les fichiers xml conf.xml, listeMutant.xml et les fichiers xml generaient par Junit
+ * @author user
+ *
+ */
 public class LireXML {
 
-    
+    /**
+     * Lit les fichier xml test de Junit
+     * @param path
+     * @return
+     */
     public TestsParClass lireTests(String path){  
         TestsParClass testClass = new TestsParClass();
         SAXBuilder saxBuilder = new SAXBuilder();  
@@ -106,13 +116,17 @@ public class LireXML {
             System.out.println("Probleme lecture XML Mutant → "+e);
         }  
 
-        lireConfXML(listeMutant, saxBuilder, fileConf);
+        lireConfMutantXML(listeMutant, saxBuilder, fileConf);
      
         
         return listeMutant;
     }
     
-    
+    /**
+     * Ajoute une liste de Test a un Mutant
+     * @param tests
+     * @param mutant
+     */
     private void creerTest(Element tests, Mutant mutant){
         ArrayList<Test> listeTest = new ArrayList<Test>();
 
@@ -142,7 +156,7 @@ public class LireXML {
      * @param saxBuilder
      * @param fileConf
      */
-    private void lireConfXML(ArrayList<Mutant> listeMutant, SAXBuilder saxBuilder, File fileConf){
+    private void lireConfMutantXML(ArrayList<Mutant> listeMutant, SAXBuilder saxBuilder, File fileConf){
      // Quant tout les mutant sont creer, on récupere les mutation dans le fichier conf
         try {
             
@@ -192,5 +206,55 @@ public class LireXML {
            
     }  
     
+    
+    
+    /**
+     * Lit les processors pour creer les mutant dans le fichier conf.xml et modifier le fichier processors.txt
+     * @param listeMutant
+     * @param saxBuilder
+     * @param fileConf
+     * @throws IOException 
+     * 
+     * 
+     * 
+     */
+    public void lireProcessors(String pathConfXML, String pathOfProcTxt){  
+
+        SAXBuilder saxBuilder = new SAXBuilder();  
+      
+        File fileConf = new File(pathConfXML); 
+        
+        try {
+            
+            File fichierProc = new File(pathOfProcTxt);
+            fichierProc.createNewFile();
+            FileWriter fichier = new FileWriter(fichierProc);
+            Document documentConf = saxBuilder.build(fileConf);  
+            Element rootNode = documentConf.getRootElement(); 
+            
+            Element mutants = rootNode.getChild("mutants");
+            List<Element> listemutant = mutants.getChildren("mutant");
+
+            for(Element mutant : listemutant){
+                List<Element> listeproc = mutant.getChildren("processor");
+                
+                String res = "";
+                for(int i =0;i<listeproc.size();i++){
+                    Element proc = listeproc.get(i);
+                    if(i==0)
+                        res = res+proc.getText();
+                    else
+                        res = res + " " + proc.getText();
+                }
+                fichier.write(res + "\n");
+
+            }
+            
+            fichier.close();
+            
+        } catch (Exception e) {
+            System.out.println("Probleme lecture XML conf → "+e);
+        }
+    }
     
 }   

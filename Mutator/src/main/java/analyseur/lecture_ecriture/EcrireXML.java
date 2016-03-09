@@ -16,6 +16,11 @@ import analyseur.analyse.Mutant;
 import analyseur.analyse.Test;
 import analyseur.analyse.TestsParClass;
 
+/**
+ * Permet d'ecrire du xml dans le fichier listeMutant.xml
+ * @author user
+ *
+ */
 public class EcrireXML {
     
     private File file;
@@ -26,17 +31,11 @@ public class EcrireXML {
         
         file = new File(path);  
         
-     
         try {  
             
             document = saxBuilder.build(file); 
-            
             Element mutants = document.getRootElement();    
-
             ajouterMutant(mutant, mutants);
-            
-
-            
             sauvagarder(path);
             
         }
@@ -60,12 +59,10 @@ public class EcrireXML {
         file = new File(path);  
 
         try {  
+            
             document = saxBuilder.build(file); 
-            
             Element rootNode = document.getRootElement();      
-
             rootNode.removeContent();  
-            
             sauvagarder(path);
             
         }

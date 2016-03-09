@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Pemret de creer une mutation qui est applique sur un processor
+ * Permet de creer une mutation qui est applique par un processor.
  * @author Quentin Laborde
  *
  */

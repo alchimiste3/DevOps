@@ -4,42 +4,18 @@
   <mutants>
     <mutant>
       <processor>PlusMinus</processor>
-    </mutant>
-    <mutant>      
-      <processor>GELE</processor>
-      <processor>PlusMinus</processor>
-    </mutant>
-    <mutant>
-      <processor>IncDec</processor>
-      <processor>DoubleMutator</processor>
-    </mutant>
-    <mutant>
-      <processor>IncDec</processor>
-      <processor>DoubleMutator</processor>
-      <processor>PlusMinus</processor>
       <processor>GELE</processor>
     </mutant>
   </mutants>
 
   <processors>
     <processor>
-      <nom>PlusMinus</nom> <!-- s'applique 3 fois sur la méthode getJ de Classe1 et tout Classe2 --> 
-      <applications>3</applications>
-      <classe>
-        <nom>Classe1</nom>
-        <methode>getJ</methode>
-      </classe>
-      <classe>
-        <nom>Classe2</nom>
-        <methode>getJ</methode>
-      </classe>
-    </processor>
-
-    <processor>
       <nom>PlusMinus</nom><!-- s'applique sur la classe Classe1-->
-          <classe>
-            <nom>Classe1</nom> 
-          </classe>
+          <package>
+            <nom>package2</nom>
+
+          </package>
+          <applications>4</applications>
     </processor>
   </processors>
 <!--GELE et DoubleMutator n'ont pas de configuration définie, donc s'applique tout le temps partout où ils peuvent -->
