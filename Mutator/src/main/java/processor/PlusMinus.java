@@ -4,8 +4,10 @@ import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
+import spoon.support.reflect.declaration.CtMethodImpl;
 
 public class PlusMinus extends AbstractProjectProcessor {
 
@@ -34,6 +36,8 @@ public class PlusMinus extends AbstractProjectProcessor {
     public boolean isToBeProcessed(CtElement candidate) {
         if(pecularVerify(candidate)) {
             if(verifyClass(candidate.getParent(CtClass.class).getSimpleName())){
+                CtConstructor m = candidate.getParent(CtConstructor.class);
+                System.out.println("bloublou " + m.getSignature());
                 return verifyNbApplication();
             }
         }

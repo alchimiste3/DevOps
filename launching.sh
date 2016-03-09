@@ -36,7 +36,7 @@ do
 
 	#launching test
 	cd ../SourcesUnderTest
-	mvn -q clean test
+	mvn -q -e clean test
 
 	#analysing
 	cd ../Mutator

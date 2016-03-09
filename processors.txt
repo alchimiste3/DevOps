@@ -1,5 +1,1 @@
-DoubleMutator
-PlusMinus GELE
-PlusMinus PlusMinus
-IncDec
-IncDec PlusMinus GELE IncDec GELE
+PlusMinus
