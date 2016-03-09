@@ -43,10 +43,10 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
     public boolean verifyClass(String classe) {
         if(classes.size()==0)
             return true;
-
         for(String c:classes) {
-            if (c.equals(classe))
-               return true;
+            if (c.equals(classe)) {
+                return true;
+            }
         }
         return false;
     }
@@ -63,7 +63,15 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
         for(String m: methodes) {
             if (m.equals(method))
                 return true;
-            }
+        }
+        return false;
+    }
+
+    public boolean verifyNbApplication() {
+        if(this.nb_applications!=0) {
+            this.nb_applications--;
+            return true;
+        }
         return false;
     }
 
@@ -73,15 +81,13 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
      */
     public void setClasses() {
         this.classes=new ArrayList<String>();
-
         String path = new java.io.File("").getAbsolutePath();
         path=path.substring(0,path.lastIndexOf('/'));
         path=path+"/conf.xml";
-        System.out.println(path);
 
         SAXBuilder saxBuilder = new SAXBuilder();
         File fileConf = new File(path);
-
+        Element config = null;
         try {
             Document documentConf = saxBuilder.build(fileConf);
             Element rootNode = documentConf.getRootElement();
@@ -89,25 +95,22 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
             Element processors = rootNode.getChild("processors");
 
             List<Element> configs = processors.getChildren("processor");
-            Element config=null;
             for(Element c : configs) {
                 if(c.getChildText("nom").equals(this.nom))
                     config = c;
             }
-
             List<Element> classes = config.getChildren("classe");
             for(Element e : classes) {
                 this.classes.add(e.getChildText("nom"));
-                System.out.println("\n\n\n"+e.getChildText("nom")+"\n\n\n");
             }
-        } catch (Exception e) {
+
+        }
+        catch (Exception e) {
             if(e instanceof NullPointerException) {
                 System.out.println("Pas de configuration prévue.Application à toutes les classes");
-                this.classes=new ArrayList<String>();
-              //  e.printStackTrace();
+                e.printStackTrace();
             }
         }
-        //TODO:récupérer info du xml si existante . On utilise la variable "nom" pour savoir où chercher
     }
 
     /**
@@ -125,8 +128,32 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
      * @return le nombre de fois à appliquer le processeur
      */
     public void setNbApplication() {
-        int nb=-1;
-        //TODO:récupérer info du xml si existante . On utilise la variable "nom" pour savoir où chercher
-        this.nb_applications = nb;
+        this.nb_applications = -1;
+        String path = new java.io.File("").getAbsolutePath();
+        path=path.substring(0,path.lastIndexOf('/'));
+        path=path+"/conf.xml";
+
+        SAXBuilder saxBuilder = new SAXBuilder();
+        File fileConf = new File(path);
+        Element config = null;
+        try {
+            Document documentConf = saxBuilder.build(fileConf);
+            Element rootNode = documentConf.getRootElement();
+
+            Element processors = rootNode.getChild("processors");
+
+            List<Element> configs = processors.getChildren("processor");
+            for(Element c : configs) {
+                if(c.getChildText("nom").equals(this.nom))
+                    config = c;
+            }
+            String nb_str = config.getChildText("applications");
+            this.nb_applications = Integer.parseInt(nb_str);
+        }
+        catch (Exception e) {
+            if(e instanceof NullPointerException) {
+                e.printStackTrace();
+            }
+        }
     }
 }

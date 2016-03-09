@@ -40,6 +40,7 @@
           <classe>
             <nom>Classe1</nom> 
           </classe>
+          <applications>4</applications>
     </processor>
   </processors>
 <!--GELE et DoubleMutator n'ont pas de configuration définie, donc s'applique tout le temps partout où ils peuvent -->

@@ -21,4 +21,21 @@ public class Classe1Test {
         Classe1 c = new Classe1();
         Assert.assertEquals(1,c.getK());
     }
+    @Test
+    public void testL() {
+        Classe1 c = new Classe1();
+        Assert.assertEquals(1,c.getL());
+    }
+
+    @Test
+    public void testM() {
+        Classe1 c = new Classe1();
+        Assert.assertEquals(1,c.getM());
+    }
+
+    @Test
+    public void testN() {
+        Classe1 c = new Classe1();
+        Assert.assertEquals(1,c.getN());
+    }
 }

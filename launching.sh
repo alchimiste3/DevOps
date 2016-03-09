@@ -24,10 +24,10 @@ mvn clean install
 mvn exec:java -Dexec.mainClass=analyseur.main.MainInitiale -Dexec.args="$pathOfResultsDirectory $nameOfResultFile $pathOfXMLMutant"
 
 #launching tests with one processor
-for (( i=0; i<=$(wc -l < ../processors.txt) ; i++ ))
+for (( i=1; i<=$(wc -l < ../processors.txt) ; i++ ))
 do
 	#get the i-th line of processors.txt
-	paths=$(sed -n "$((i+1))p;" < ../processors.txt)
+	paths=$(sed -n "$((i))p;" < ../processors.txt)
 	#defining the name of the sery of tests 
 	nameOfTest=$( echo "$paths" | tr ' ' '+')
 
