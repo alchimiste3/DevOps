@@ -4,7 +4,59 @@ SourcesUnderTest est un projet exemple à tester.
 
 Pour appliquer la chaîne de build sur votre propre projet maven, vous devez :
 
-* 1) Copiez-collez les dépendances et plugin ci-dessou dans le pom de votre projet à tester pour que celui-ci puisse utiliser spoon.
+* 1) Copiez-collez les dépendances et plugin ci-dessous dans le pom de votre projet à tester pour que celui-ci puisse utiliser spoon.
+```
+  <dependencies>
+    <dependency>
+      <groupId>fr.inria.gforge.spoon</groupId>
+      <artifactId>spoon-core</artifactId>
+      <version>5.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>groupId</groupId>
+      <artifactId>Mutator</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <executable>/usr/lib/jvm/java-8-oracle/</executable>
+          <compilerVersion>1.8</compilerVersion>
+        </configuration>
+      </plugin>
+      <!--validate -->
+      <!--initialize -->
+      <!--plugin spoon : generate-sources -->
+      <plugin>
+        <groupId>fr.inria.gforge.spoon</groupId>
+        <artifactId>spoon-maven-plugin</artifactId>
+        <version>2.2</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <processors>
+          </processors>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  ```
 * 2) Dans le fichier launching.sh, modifiez les deux premières lignes : 
    * pathOfDirectory indique le chemin du répertoire où se situent Mutator et votre projet . 
    * nameOfProject indique le nom de votre projet (par défaut, SourcesUnderTest)
