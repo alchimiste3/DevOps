@@ -11,6 +11,7 @@ Le fichier shell lance les différentes étapes de la chaîne de build :
 * Analyse du test : On analyse les fichiers .xml de sortie pour concaténer les informations voulues dans le fichier results.html de sortie ainsi que dans le fichier listeMutant.xml qui sauvegarde les tests de chaque boucle avant le début des nouveaux tests. 
 * Analyse finale : En sortie de la boucle, le shell lance un autre programme qui effectue une analyse complète de tout les résultats des tests effectués sur des mutants grâce au fichier listeMutant.xml . Ce programme complète le fichier de sortie avec une analyse des mutants morts nés, morts mais surtout des mutants vivants en indiquant les mutations spécifiques qui ont fait réussir les tests là où ils n’auraient pas dû.
 
+![Chaine](https://raw.githubusercontent.com/alchimiste3/DevOps/archi.png)
 
 
 Nous avons donc bien une chaîne de build complète qui effectue les tests demandés par l’utilisateur et qui fournit un rapport html contenant des informations pertinentes pour les développeurs afin qu’ils puissent rendre leurs tests unitaires plus robustes.
