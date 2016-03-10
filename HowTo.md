@@ -22,6 +22,7 @@ On peut choisir d’appliquer ces processeurs tout le temps ou un certain nombre
 
 Pour indiquer les séries de processeurs que nous souhaitons appliquer, et comment nous voulons les appliquer, il faut aller dans le fichier conf.xml . Il est déjà rempli avec un exemple :
 ```
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- liste des mutants à appliquer-->
 <configuration>
   <mutants>
