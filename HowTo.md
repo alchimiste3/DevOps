@@ -22,7 +22,6 @@ On peut choisir d’appliquer ces processeurs tout le temps ou un certain nombre
 
 Pour indiquer les séries de processeurs que nous souhaitons appliquer, et comment nous voulons les appliquer, il faut aller dans le fichier conf.xml . Il est déjà rempli avec un exemple :
 
-<?xml version="1.0" encoding="UTF-8"?>
 <!-- liste des mutants à appliquer-->
 <configuration>
   <mutants>
@@ -44,13 +43,12 @@ Pour indiquer les séries de processeurs que nous souhaitons appliquer, et comme
     <processor>
           <nom>PlusMinus</nom><!-- s'applique sur la classe Classe1-->
           <package>
-                <nom>package1</nom>
-        <classe>
-<nom>Classe1</nom>
-<methode>methode()</methode>
-<methode>methode(int)</methode>
-</classe>
-
+              <nom>package1</nom>
+              <classe>
+                  <nom>Classe1</nom>
+                  <methode>methode()</methode>
+                  <methode>methode(int)</methode>
+              </classe>
           </package>
           <applications>4</applications>
     </processor>
