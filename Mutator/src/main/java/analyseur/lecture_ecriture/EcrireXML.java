@@ -26,6 +26,31 @@ public class EcrireXML {
     private File file;
     private Document document;
 
+    public void addMortNe(String path) {
+        SAXBuilder saxBuilder = new SAXBuilder();
+
+        file = new File(path);
+
+        try {
+
+            document = saxBuilder.build(file);
+            Element root = document.getRootElement();
+            try {
+                Element mortsnes = root.getChild("mortsnes");
+                int nb = Integer.parseInt(mortsnes.getText());
+                nb++;
+                mortsnes.setText(nb+"");
+            }
+            catch(NullPointerException e) {
+                root.addContent(new Element("mortsnes").setText("1"));
+            }
+            sauvagarder(path);
+        }
+        catch(Exception e){
+            System.out.println("Probleme ecriture mutant → "+e);
+        }
+    }
+
     public void ecrireMutant(Mutant mutant, String path){
         SAXBuilder saxBuilder = new SAXBuilder();  
         
@@ -37,12 +62,11 @@ public class EcrireXML {
             Element mutants = document.getRootElement();    
             ajouterMutant(mutant, mutants);
             sauvagarder(path);
-            
+
         }
         catch(Exception e){
             System.out.println("Probleme ecriture mutant → "+e);
         }
-        
     }
     
     private void sauvagarder(String pathPom) throws IOException{

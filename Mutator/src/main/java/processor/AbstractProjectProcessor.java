@@ -136,7 +136,6 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
         catch (Exception e) {
             if(e instanceof NullPointerException) {
                 System.out.println("Pas de configuration prévue.Application à toutes les classes");
-                e.printStackTrace();
             }
         }
     }
@@ -172,7 +171,7 @@ abstract class AbstractProjectProcessor extends spoon.processing.AbstractProcess
         }
         catch (Exception e) {
             if(e instanceof NullPointerException) {
-                e.printStackTrace();
+                System.out.println("Pas de configuration prévue.Application tout le temps");
             }
         }
     }

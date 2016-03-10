@@ -22,6 +22,22 @@ import analyseur.analyse.TestsParClass;
  */
 public class LireXML {
 
+    public int getTotalMortsNes(String path) {
+        SAXBuilder saxBuilder = new SAXBuilder();
+        File file = new File(path);
+
+        try {
+            Document document = saxBuilder.build(file);
+            Element rootNode = document.getRootElement();
+            Element mortsnes = rootNode.getChild("mortsnes");
+            int nb = Integer.parseInt(mortsnes.getText());
+            return nb;
+        } catch (Exception e) {
+            if(!(e instanceof NullPointerException))
+                e.printStackTrace();
+        }
+        return 0;
+    }
     /**
      * Lit les fichier xml test de Junit
      * @param path
@@ -205,18 +221,11 @@ public class LireXML {
         mut.getMutations().add(mutation);
            
     }  
-    
-    
-    
-    /**
+
+       /**
      * Lit les processors pour creer les mutant dans le fichier conf.xml et modifier le fichier processors.txt
-     * @param listeMutant
-     * @param saxBuilder
-     * @param fileConf
-     * @throws IOException 
-     * 
-     * 
-     * 
+     * @param pathConfXML
+     * @param pathOfProcTxt
      */
     public void lireProcessors(String pathConfXML, String pathOfProcTxt){  
 

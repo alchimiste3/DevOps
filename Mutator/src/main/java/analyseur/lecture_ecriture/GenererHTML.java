@@ -40,6 +40,30 @@ public class GenererHTML {
         }
     }
 
+    public void ecrireMortNe(String nomSerieTest) {
+        try {
+            bw.write("<h2>La série de tests \""+nomSerieTest+"\" a échoué à la compilation</h2>");
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
+        }
+    }
+
+    public void totalMortsNes(int nb_mn) {
+        try {
+            if(nb_mn==0) {
+                bw.write("<h2> Tous les mutants sont passés à la compilation</h2>");
+            }
+            else if (nb_mn==1) {
+                bw.write("<h2> Un mutant n'a pas compilé</h2>");
+            }
+            else{
+                bw.write("<h2>"+ nb_mn +" mutants n'ont pas compilé</h2>");
+            }
+        } catch (IOException e) {
+            System.out.println("Impossible d'écrire dans le fichier" + e.getStackTrace());
+        }
+    }
     /**
      * Calcule le pourcentage de fail pourtout les test d'un mutant
      * @param listeTests
@@ -132,7 +156,6 @@ public class GenererHTML {
     /**
      * On ecrire la fin du tableaux des test pas class de test
      * On doit separer cette partie pour pouvoir remplire le tableau avec plusieur appelle de methode.
-     * @param nomSerieTest
      */
     public void ecrireFinTableauTestParClass(ArrayList<ArrayList<Test>> listeTests){
         try {
@@ -156,7 +179,6 @@ public class GenererHTML {
      */
     public void genererTableauxMutantMort(ArrayList<Mutant> listeMutant) {
         try {
-            
             bw.write("</div><div><h2>Les mutant Mort</h2>");
             bw.write("<table border>");
             bw.write("<tr>");

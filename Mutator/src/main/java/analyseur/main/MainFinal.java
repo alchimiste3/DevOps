@@ -39,9 +39,13 @@ public class MainFinal {
 
         LireXML lire = new LireXML();
         GenererHTML gen = new GenererHTML(dossierHTML, nomFichierHtml);
-        
-        
+
+        int nb_mn = lire.getTotalMortsNes(nomFichierMutantXML);
         ArrayList<Mutant> liste = lire.lireMutant(nomFichierMutantXML,nomFichierConfXML);
+        for(Mutant mutant : liste) {
+            System.out.println("bloublou "+mutant.getNom());
+        }
+        gen.totalMortsNes(nb_mn);
         gen.genererTableauxMutantMort(liste);
         gen.genererTableauxMutantVivant(liste);
         gen.ecrireFin();

@@ -34,19 +34,24 @@ do
 	#modifying pom
 	mvn -q exec:java -Dexec.mainClass=modificateurPom.main.Main -Dexec.args="$pathOfPom $paths"
 
-	#launching test
-	cd ../SourcesUnderTest
-	mvn -q -e clean test
 
-	#analysing
-	cd ../Mutator
-	mvn exec:java -Dexec.mainClass=analyseur.main.MainAnalyseur -Dexec.args="$pathOfSurefireReports $pathOfResultsDirectory $nameOfResultFile $nameOfTest"
+	cd ../SourcesUnderTest
+	#compiling
+	mvn compile
+	if [ $? -eq 0 ] 
+	then
+		#launching test
+		mvn -q -e clean test
+		
+		#analysing
+		cd ../Mutator
+		mvn exec:java -Dexec.mainClass=analyseur.main.MainAnalyseur -Dexec.args="$pathOfSurefireReports $pathOfResultsDirectory $nameOfResultFile $nameOfTest"
+	
+	else 
+		cd ../Mutator
+		mvn exec:java -Dexec.mainClass=analyseur.main.MainMortsNes -Dexec.args="$pathOfSurefireReports $pathOfResultsDirectory $nameOfResultFile $nameOfTest"
+	fi
 done
 
 mvn exec:java -Dexec.mainClass=analyseur.main.MainFinal -Dexec.args="$pathOfResultsDirectory $nameOfResultFile $pathOfXMLMutant $pathOfXMLConf"
 
-mvn clean
-cd ../SourcesUnderTest
-mvn clean
-cd ..
-rm processors.txt

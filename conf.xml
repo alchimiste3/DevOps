@@ -3,8 +3,10 @@
 <configuration>
   <mutants>
     <mutant>
+      <processor>PublicToPrivate</processor>
+    </mutant>
+        <mutant>
       <processor>PlusMinus</processor>
-      <processor>GELE</processor>
     </mutant>
   </mutants>
 

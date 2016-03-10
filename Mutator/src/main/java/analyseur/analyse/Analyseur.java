@@ -31,7 +31,13 @@ public class Analyseur {
         this.nomFichierMutantXML = nomFichierMutantXML;
         listeFichierTest = new ArrayList<String>();
     }
-    
+
+    public void indiquerMortNe() {
+        GenererHTML genHTML = new GenererHTML(repertoireHTML,nomFichierHtml);
+        genHTML.ecrireMortNe(nomSerieTest);
+        EcrireXML ecrire = new EcrireXML();
+        ecrire.addMortNe(nomFichierMutantXML);
+    }
     /**
      * Analyse chaque fichier xml creer lors de test Junit et remplie un tableau resumant chaque fichier
      */
