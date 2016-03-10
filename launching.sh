@@ -18,7 +18,6 @@ nameOfResultFile="result.html"
 rm -f ./results/result.html
 #creating dependency
 cd Mutator
-mvn -q clean install
 
 mvn -q exec:java -Dexec.mainClass=analyseur.main.MainInitiale -Dexec.args="$pathOfResultsDirectory $nameOfResultFile $pathOfXMLMutant $pathOfXMLConf $pathOfProcTxt"
 
