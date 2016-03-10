@@ -21,7 +21,7 @@ Nous avons 7 types de processeurs actuellement, en voici la liste :
 On peut choisir d’appliquer ces processeurs tout le temps ou un certain nombre donné de fois, partout ou dans des packages donnés, des classes données, ou des méthodes données .
 
 Pour indiquer les séries de processeurs que nous souhaitons appliquer, et comment nous voulons les appliquer, il faut aller dans le fichier conf.xml . Il est déjà rempli avec un exemple :
-
+```
 <!-- liste des mutants à appliquer-->
 <configuration>
   <mutants>
@@ -54,7 +54,7 @@ Pour indiquer les séries de processeurs que nous souhaitons appliquer, et comme
     </processor>
   </processors>
 </configuration>
-
+```
 À l’intérieur de la balise “mutants”, sont situées les différentes séries de processeurs que l’on souhaite exécuter sur notre projet pour obtenir des mutants à tester . Dans l’exemple ci-dessus, on effectuera les séries de processeurs IncDec puis PlusMinus, PlusMinus, GELE puis PlusMinus puis IncDec .
 
 À  l’intérieur de la balise “processors”, on définit les configurations souhaitées pour chaque processeur. Par défaut, si aucune  configuration n’est présente, le processeur s’applique sur tous les éléments lui correspondant (par exemple + et - pour PlusMinus), tout le temps.
