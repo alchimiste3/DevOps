@@ -113,7 +113,7 @@ public class GenererHTML {
         
         try {
             bw.write("<h2>"+pourcentageMutantMort+"% de mutants sont mort et "+pourcentageMutantVivant+"% des mutant sont vivant apres les tests</h2>");
-            bw.close();
+           // bw.close();
 
         } catch (IOException e) {
             // TODO Auto-generated catch block

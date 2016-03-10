@@ -216,7 +216,6 @@ public class LireXML {
                 mutation.addClass(nomClass);
                 
                 List<Element> listMethode = c.getChildren("methode");
-                System.out.println("\n\n\n\n" + listMethode.size());
                 for(Element m : listMethode){
                     mutation.addMethode(nomClass, m.getText());
                 }

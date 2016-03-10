@@ -3,25 +3,32 @@
 <configuration>
   <mutants>
     <mutant>
-      <processor>PublicToPrivate</processor>
+          <processor>IncDec</processor>
+          <processor>PlusMinus</processor>
     </mutant>
-        <mutant>
-      <processor>PlusMinus</processor>
+    <mutant>
+          <processor>PlusMinus</processor>
+    </mutant>
+    <mutant>
+          <processor>GELE</processor>
+          <processor>PlusMinus</processor>
+          <processor>IncDec</processor>
     </mutant>
   </mutants>
 
   <processors>
     <processor>
-      <nom>PlusMinus</nom><!-- s'applique sur la classe Classe1-->
+          <nom>PlusMinus</nom><!-- s'applique sur la classe Classe1-->
           <package>
-            <nom>package2</nom>
-            <classe>
-              <nom>Classe2</nom>
-            </classe>
+                <nom>package1</nom>
+        <classe>
+<nom>Classe1</nom>
+<methode>methode()</methode>
+<methode>methode(int)</methode>
+</classe>
+
           </package>
           <applications>4</applications>
     </processor>
   </processors>
-<!--GELE et DoubleMutator n'ont pas de configuration définie, donc s'applique tout le temps partout où ils peuvent -->
-
 </configuration>
