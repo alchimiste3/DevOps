@@ -1,3 +1,5 @@
+## Nos choix : 
+
 Nous avons choisi d’articuler notre chaîne de build autour de l'exécution d’un script shell, launcher.sh, avec quatre étapes principales qui s'enchaînent : generate-sources , compile, test et finalement l’analyse des resultats.
 Le fichier shell lance les différentes étapes de la chaîne de build : 
 
@@ -8,6 +10,8 @@ Le fichier shell lance les différentes étapes de la chaîne de build :
 * Tests : Sinon,il confronte ce mutant au banc de tests du projet .
 * Analyse du test : On analyse les fichiers .xml de sortie pour concaténer les informations voulues dans le fichier results.html de sortie ainsi que dans le fichier listeMutant.xml qui sauvegarde les tests de chaque boucle avant le début des nouveaux tests. 
 * Analyse finale : En sortie de la boucle, le shell lance un autre programme qui effectue une analyse complète de tout les résultats des tests effectués sur des mutants grâce au fichier listeMutant.xml . Ce programme complète le fichier de sortie avec une analyse des mutants morts nés, morts mais surtout des mutants vivants en indiquant les mutations spécifiques qui ont fait réussir les tests là où ils n’auraient pas dû.
+
+
 
 Nous avons donc bien une chaîne de build complète qui effectue les tests demandés par l’utilisateur et qui fournit un rapport html contenant des informations pertinentes pour les développeurs afin qu’ils puissent rendre leurs tests unitaires plus robustes.
 
@@ -24,13 +28,13 @@ Nous avons choisie d’implémenter des mutations basique car la plupart des dé
 
 ## Forces et faiblesses
 
-# Forces
+### Forces
 
 Notre analyse des tests sur les mutants est minimale mais remplit son rôle informatif. 
 Notre chaîne de build est facilement modifiable et maintenable . Des processeur peuvent également facilement être implémentés .
 L’utilisateur peut configurer comme il le souhaite (avec les processeurs et sélecteurs disponibles) la chaîne de build, ainsi que son projet à tester .
 
-# Faiblesses
+###  Faiblesses
 Nous aurions pu avec plus de temps améliorer l’affichage et le nombre d’informations disponibles : la ligne où un processeur mort né est mort, les endroits où sont appliqués les tests (bien que cette information a été définie par l’utilisateur dans conf.xml),...
 Un code ne donnant pas de lui-même des indications de son fonctionnement (par ligne de commande par exemple) . Le code étant destiné à des informaticiens, nous n’avons pas insisté sur ce point .
 Des processeurs un peu trop simples. 
