@@ -25,7 +25,7 @@ l’installation du projet se fait en un lancement de script build.sh .
 la chaîne de build peut s’appliquer à n’importe quel projet,à condition qu’on lui donne le chemin de ce projet et qu’on place le plugin spoon et les dépendances nécessaires dans le pom.xml (voir HowTo.md). 
 les processeurs héritent d’une classe mère abstraite AbstractProjectProcessor, où sont définies toutes les méthodes communes aux processeurs du projet (lecture sur conf.xml des endroits où appliquer les mutateurs) . Un processeur lié à conf.xml est alors facilement mis en place .
 
-Nous avons choisie d’implémenter des mutations basique car la plupart des développeurs font leur test unitaire sur les partie du code les plus complexes et ne test pas les fonctions basics. On a donc plus de chance de garder un mutant vivant et donc d’indiquer une faille au développeur sur son code. 
+Nous avons choisi d’implémenter des mutations basique car la plupart des développeurs font leur test unitaire sur les partie du code les plus complexes et ne testent pas les fonctions basiques. On a donc plus de chance de garder un mutant vivant et donc d’indiquer une faille au développeur sur son code. 
 
 ## Forces et faiblesses
 
