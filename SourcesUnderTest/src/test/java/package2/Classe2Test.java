@@ -10,9 +10,9 @@ import java.util.*;
  */
 public class Classe2Test {
 
-    @Test
-    public void testI() {
-        Classe2 c = new Classe2();
-        Assert.assertEquals(1,c.getI());
-    }
+    // @Test
+    // public void testI() {
+    //     Classe2 c = new Classe2();
+    //     Assert.assertEquals(1,c.getI());
+    // }
 }

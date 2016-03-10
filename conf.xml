@@ -15,7 +15,9 @@
       <nom>PlusMinus</nom><!-- s'applique sur la classe Classe1-->
           <package>
             <nom>package2</nom>
-
+            <classe>
+              <nom>Classe2</nom>
+            </classe>
           </package>
           <applications>4</applications>
     </processor>

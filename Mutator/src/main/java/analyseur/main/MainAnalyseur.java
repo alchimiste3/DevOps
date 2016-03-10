@@ -19,7 +19,6 @@ public class MainAnalyseur {
         String nomSerieTest = "nom de test par défaut";
         String nomFichierMutantXML = "listeMutant.xml";
         
-        System.out.println("args.length = "+args.length);
         if(args.length >= 3){
             dossierTestXML = args[0];
             dossierHTML = args[1];

@@ -1,139 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mutants>
+  <mortsnes>1</mortsnes>
   <mutant>
-    <nom>+PlusMinus</nom>
-    <nbTest>7</nbTest>
-    <nbTestFail>4</nbTestFail>
+    <nom>PlusMinus</nom>
+    <nbTest>6</nbTest>
+    <nbTestFail>0</nbTestFail>
     <nbTestError>0</nbTestError>
     <nbTestSkipped>0</nbTestSkipped>
     <processors>
-      <processor />
       <processor>PlusMinus</processor>
     </processors>
     <tests>
       <test>
         <nomClassTest>package1.Classe1Test</nomClassTest>
         <nom>testJ</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testK</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testL</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testM</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testN</nom>
-        <fail>false</fail>
-        <typeFail />
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testDouble</nom>
-        <fail>false</fail>
-        <typeFail />
-      </test>
-      <test>
-        <nomClassTest>package2.Classe2Test</nomClassTest>
-        <nom>testI</nom>
-        <fail>false</fail>
-        <typeFail />
-      </test>
-    </tests>
-  </mutant>
-  <mutant>
-    <nom>+GELE+PlusMinus</nom>
-    <nbTest>7</nbTest>
-    <nbTestFail>4</nbTestFail>
-    <nbTestError>0</nbTestError>
-    <nbTestSkipped>0</nbTestSkipped>
-    <processors>
-      <processor />
-      <processor>GELE</processor>
-      <processor>PlusMinus</processor>
-    </processors>
-    <tests>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testJ</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testK</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testL</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testM</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testN</nom>
-        <fail>false</fail>
-        <typeFail />
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testDouble</nom>
-        <fail>false</fail>
-        <typeFail />
-      </test>
-      <test>
-        <nomClassTest>package2.Classe2Test</nomClassTest>
-        <nom>testI</nom>
-        <fail>false</fail>
-        <typeFail />
-      </test>
-    </tests>
-  </mutant>
-  <mutant>
-    <nom>+IncDec+DoubleMutator</nom>
-    <nbTest>7</nbTest>
-    <nbTestFail>3</nbTestFail>
-    <nbTestError>0</nbTestError>
-    <nbTestSkipped>0</nbTestSkipped>
-    <processors>
-      <processor />
-      <processor>IncDec</processor>
-      <processor>DoubleMutator</processor>
-    </processors>
-    <tests>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testJ</nom>
         <fail>false</fail>
         <typeFail />
       </test>
       <test>
         <nomClassTest>package1.Classe1Test</nomClassTest>
         <nom>testK</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
+        <fail>false</fail>
+        <typeFail />
       </test>
       <test>
         <nomClassTest>package1.Classe1Test</nomClassTest>
@@ -156,72 +44,8 @@
       <test>
         <nomClassTest>package1.Classe1Test</nomClassTest>
         <nom>testDouble</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package2.Classe2Test</nomClassTest>
-        <nom>testI</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-    </tests>
-  </mutant>
-  <mutant>
-    <nom>+IncDec+DoubleMutator+PlusMinus+GELE</nom>
-    <nbTest>7</nbTest>
-    <nbTestFail>6</nbTestFail>
-    <nbTestError>0</nbTestError>
-    <nbTestSkipped>0</nbTestSkipped>
-    <processors>
-      <processor />
-      <processor>IncDec</processor>
-      <processor>DoubleMutator</processor>
-      <processor>PlusMinus</processor>
-      <processor>GELE</processor>
-    </processors>
-    <tests>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testJ</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testK</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testL</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testM</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testN</nom>
         <fail>false</fail>
         <typeFail />
-      </test>
-      <test>
-        <nomClassTest>package1.Classe1Test</nomClassTest>
-        <nom>testDouble</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
-      </test>
-      <test>
-        <nomClassTest>package2.Classe2Test</nomClassTest>
-        <nom>testI</nom>
-        <fail>true</fail>
-        <typeFail>java.lang.AssertionError</typeFail>
       </test>
     </tests>
   </mutant>

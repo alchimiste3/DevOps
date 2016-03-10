@@ -204,16 +204,22 @@ public class LireXML {
         Mutation mutation = new Mutation();
         
         mutation.setNom(proc.getChildText("nom"));
-                            
-        List<Element> listClass = proc.getChildren("classe");
         
-        for(Element c : listClass){
-            String nomClass = c.getChildText("nom");
-            mutation.addClass(nomClass);
+        List<Element> listPackage = proc.getChildren("package");
+          
+        
+        for(Element p : listPackage){
+            List<Element> listClass = p.getChildren("classe");
             
-            List<Element> listMethode = c.getChildren("methode");
-            for(Element m : listMethode){
-                mutation.addMethode(nomClass, m.getText());
+            for(Element c : listClass){
+                String nomClass = c.getChildText("nom");
+                mutation.addClass(nomClass);
+                
+                List<Element> listMethode = c.getChildren("methode");
+                System.out.println("\n\n\n\n" + listMethode.size());
+                for(Element m : listMethode){
+                    mutation.addMethode(nomClass, m.getText());
+                }
             }
         }
         

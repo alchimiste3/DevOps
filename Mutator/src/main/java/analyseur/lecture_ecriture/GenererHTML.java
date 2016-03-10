@@ -257,9 +257,13 @@ public class GenererHTML {
                                         
                                         if(listMethode.size() != 0){
                                             for(int z = 0 ; z < listMethode.size(); z++){            
-                                                bw.write("<tr class=\"Methode\">"+listMethode.get(z)+"</tr>");
+                                                bw.write("<tr class=\"Methode\"><td>"+listMethode.get(z)+"</td></tr>");
 
                                             }
+                                        }
+                                        else{
+                                            bw.write("<tr><td class=\"Methode\">Toutes les methodes</td></tr>");
+
                                         }
                                         bw.write("</table>");
                                         bw.write("</td>");
@@ -267,6 +271,10 @@ public class GenererHTML {
 
                                     }
                                 }
+                                else{
+                                    bw.write("<tr><td class=\"class\">Toutes les Classes et methodes</td></tr>");
+                                }
+                                
                                 bw.write("</table>");
                                 bw.write("</td>");
                                 bw.write("</tr>");

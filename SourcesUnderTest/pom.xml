@@ -50,10 +50,7 @@
         <configuration>
           <processors>
             <processor>processor./home/user/DevOps/DevOps/SourcesUnderTest/pom.xml</processor>
-            <processor>processor.IncDec</processor>
-            <processor>processor.DoubleMutator</processor>
             <processor>processor.PlusMinus</processor>
-            <processor>processor.GELE</processor>
           </processors>
         </configuration>
       </plugin>
