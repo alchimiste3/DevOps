@@ -36,6 +36,7 @@ Notre chaîne de build est facilement modifiable et maintenable . Des processeur
 L’utilisateur peut configurer comme il le souhaite (avec les processeurs et sélecteurs disponibles) la chaîne de build, ainsi que son projet à tester .
 
 ###  Faiblesses
-Nous aurions pu avec plus de temps améliorer l’affichage et le nombre d’informations disponibles : la ligne où un processeur mort né est mort, les endroits où sont appliqués les tests (bien que cette information a été définie par l’utilisateur dans conf.xml),...
-Un code ne donnant pas de lui-même des indications de son fonctionnement (par ligne de commande par exemple) . Le code étant destiné à des informaticiens, nous n’avons pas insisté sur ce point .
-Des processeurs un peu trop simples. 
+* Nous aurions pu avec plus de temps améliorer l’affichage et le nombre d’informations disponibles : la ligne où un processeur mort né est mort, les endroits où sont appliqués les tests (bien que cette information a été définie par l’utilisateur dans conf.xml),...
+* Un code ne donnant pas de lui-même des indications de son fonctionnement (par ligne de commande par exemple) . Le code étant destiné à des informaticiens, nous n’avons pas insisté sur ce point .
+
+* Des processeurs un peu trop simples. 
