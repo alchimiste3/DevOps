@@ -57,9 +57,9 @@ Pour appliquer la chaîne de build sur votre propre projet maven, vous devez :
     </plugins>
   </build>
   ```
-* 2) Dans le fichier launching.sh, modifiez les deux premières lignes : 
+* 2) Dans le fichier launching.sh, modifiez les deux premières lignes (ce sont des répertoires, veuillez faire attention à bien placer un '/' à la fin de chaque chemin) : 
    * pathOfDirectory indique le chemin du répertoire où se situent Mutator et votre projet . 
-   * nameOfProject indique le nom de votre projet (par défaut, SourcesUnderTest)
+   * pathOfProject indique le chemin vers votre projet (par défaut, SourcesUnderTest)
 
 Nous avons 7 types de processeurs actuellement, en voici la liste :
 * IncDec : Permet de transformer les post-incrémentations en post-décrémentations et inversement.
