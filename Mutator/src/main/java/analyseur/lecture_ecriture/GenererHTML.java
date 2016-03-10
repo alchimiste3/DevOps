@@ -88,6 +88,39 @@ public class GenererHTML {
         }
         return (compteurTestFail*100)/compteurTest;
     }
+    
+    public void PourcentageMutantMortVivant(ArrayList<Mutant> listeMutant){
+        int compteurMutantVivant = 0;
+        int compteurMutantMort = 0;
+
+        int pourcentageMutantVivant = 0;
+        int pourcentageMutantMort = 0;
+
+        for (Mutant m : listeMutant){
+            if(m.getNombreTestFails().equals("0")){
+                compteurMutantVivant++;
+            }
+            else{
+                compteurMutantMort++;
+            }
+        }
+        
+        int somme = compteurMutantVivant + compteurMutantMort;
+        if(listeMutant.size() != 0){
+            pourcentageMutantVivant = (compteurMutantVivant*100)/somme;
+            pourcentageMutantMort = (compteurMutantMort*100)/somme;
+        }
+        
+        try {
+            bw.write("<h2>"+pourcentageMutantMort+"% de mutants sont mort et "+pourcentageMutantVivant+"% des mutant sont vivant apres les tests</h2>");
+            bw.close();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+       
+    }
         
 ///////////////////////////////// tableau pour chaque class test //////////////////////////////////
     

@@ -48,6 +48,8 @@ public class MainFinal {
         gen.totalMortsNes(nb_mn);
         gen.genererTableauxMutantMort(liste);
         gen.genererTableauxMutantVivant(liste);
+        gen.PourcentageMutantMortVivant(liste);
+
         gen.ecrireFin();
 
 
